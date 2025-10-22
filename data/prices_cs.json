@@ -1,0 +1,536 @@
+{
+    "komunikace": {
+        "title": "KOMUNIKACE A ZPEVNĚNÉ PLOCHY",
+        "icon": "fas fa-road",
+        "items": [
+            {
+                "service": "Montáž zámkové dlažby tl.60 mm do štěrku tl.do 50 mm (včetně ručního přemístění dlažby/štěrku do 5 m)",
+                "price": "195–205 Kč/m²"
+            },
+            {
+                "service": "Montáž zámkové dlažby tl.80 mm do štěrku tl.do 50 mm (včetně ručního přemístění dlažby/štěrku do 5 m)",
+                "price": "205–215 Kč/m²"
+            },
+            {
+                "service": "Montáž zámkové dlažby tl.100 mm do štěrku tl.do 50 mm (včetně ručního přemístění dlažby/štěrku do 5 m)",
+                "price": "215–225 Kč/m²"
+            },
+            {
+                "service": "Osazení zahradního/chodníkového obrubníku do betonového lože",
+                "price": "180–190 Kč/bm"
+            },
+            {
+                "service": "Osazení silničního/vjezdového obrubníku do betonového lože",
+                "price": "190–200 Kč/bm"
+            },
+            {
+                "service": "Osazení silničního obrubníku (oblouk) do betonového lože",
+                "price": "225–250 Kč/bm"
+            },
+            {
+                "service": "Montáž dlažby pro odvodňovací pásek šířky do 60 cm (včetně ručního přemístění dlažby do 5 m)",
+                "price": "175 Kč/bm"
+            },
+            {
+                "service": "Řezání plošné dlažby 50x50, 60x60 cm tl.20-50 mm (odvodňovací pásek)",
+                "price": "65 Kč/bm"
+            },
+            {
+                "service": "Řezání zámkové dlažby tl.60 mm (dořezy)",
+                "price": "75 Kč/bm"
+            },
+            {
+                "service": "Řezání zámkové dlažby tl.80 mm (dořezy)",
+                "price": "85 Kč/bm"
+            },
+            {
+                "service": "Řezání zámkové dlažby tl.100 mm (dořezy)",
+                "price": "95 Kč/bm"
+            },
+            {
+                "service": "Přemístění materiálů pro krytiny ručně (kolečko) při vzdálenosti skladovaného materiálu více než 5 m do 20 m",
+                "price": "650 Kč/t"
+            },
+            {
+                "service": "Zhutňování podkladu vibrační deskou do 400 kg",
+                "price": "25 Kč/m²"
+            },
+            {
+                "service": "Zhutňování podkladu vibračním válcem do 1.450 kg",
+                "price": "40 Kč/m²"
+            },
+            {
+                "service": "Podklad ze štěrku tl.do 100 mm pod zpevněné plochy vč.zhutňování (včetně ručního přemístění štěrku do 5 m)",
+                "price": "40 Kč/m²"
+            },
+            {
+                "service": "Podklad ze štěrku tl.do 150 mm pod zpevněné plochy vč.zhutňování (včetně ručního přemístění štěrku do 5 m)",
+                "price": "50 Kč/m²"
+            },
+            {
+                "service": "Podklad ze štěrku tl.do 200 mm pod zpevněné plochy vč.zhutňování (včetně ručního přemístění štěrku do 5 m)",
+                "price": "60 Kč/m²"
+            },
+            {
+                "service": "Podklad ze štěrku tl.do 250 mm pod zpevněné plochy vč.zhutňování (včetně ručního přemístění štěrku do 5 m)",
+                "price": "70 Kč/m²"
+            },
+            {
+                "service": "Zemní práce pod obrubník hloubky do 30 cm (včetně ručního přemístění vykopaného do 10m)",
+                "price": "125 Kč/m²"
+            },
+            {
+                "service": "Řezání silničního obrubníku pro oblouk",
+                "price": "30 Kč/řez"
+            },
+            {
+                "service": "Bourání betonu",
+                "price": "2750–3500 Kč/m³"
+            },
+            {
+                "service": "Doprava materiálu vlastním autem/kontejnerem 3,5 t (štěrk, písek, beton apod.)",
+                "price": "850 Kč/hod"
+            },
+            {
+                "service": "Doprava materiálu vlastním autem/kontejnerem 7,5 t (štěrk, písek, beton apod.)",
+                "price": "950 Kč/hod"
+            },
+            {
+                "service": "Přemístění materiálů pro krytiny mechanizovaně (UNC)",
+                "price": "250 Kč/t"
+            },
+            {
+                "service": "Práce na vlastním UNC (bez dopravy na stavbu)",
+                "price": "700 Kč/hod"
+            },
+            {
+                "service": "Planýrování terénu",
+                "price": "30–50 Kč/m²"
+            },
+            {
+                "service": "Neměřené práce v HZS",
+                "price": "325 Kč/hod"
+            }
+        ]
+    },
+    "kzs": {
+        "title": "KONTAKTNÍ ZATEPLOVACÍ SYSTÉMY (KZS)",
+        "icon": "fas fa-building",
+        "items": [
+            {
+                "service": "Zakrytí výplně otvoru",
+                "price": "40 Kč/m²"
+            },
+            {
+                "service": "Montáž zakládací lišty",
+                "price": "100 Kč/bm"
+            },
+            {
+                "service": "Zateplení fasád (polystyrenem) komplet",
+                "price": "850–950 Kč/m²"
+            },
+            {
+                "service": "Zateplení fasád (min.vatou) komplet",
+                "price": "1200–1500 Kč/m²"
+            },
+            {
+                "service": "Přemístění materiálů (EPS nebo MW)",
+                "price": "7–10 Kč/m² (3-4%)"
+            },
+            {
+                "service": "Příplatek za použití marmolit stěn (mozaiky)",
+                "price": "150 Kč/m²"
+            },
+            {
+                "service": "Neměřené práce v HZS",
+                "price": "275 Kč/hod"
+            },
+            {
+                "service": "Osazení rohových lišt se síťkou",
+                "price": "30 Kč/bm"
+            },
+            {
+                "service": "Osazení APU lišt se síťkou",
+                "price": "25 Kč/bm"
+            },
+            {
+                "service": "Montáž EPS stěn",
+                "price": "350 Kč/m²"
+            },
+            {
+                "service": "Montáž MW stěn",
+                "price": "400 Kč/m²"
+            },
+            {
+                "service": "Armovací vrstva 1 (síťka v lepidlu)",
+                "price": "200 Kč/m²"
+            },
+            {
+                "service": "Armovací vrstva 2 (pouze stěrka)",
+                "price": "100 Kč/m²"
+            },
+            {
+                "service": "Penetrace stěn",
+                "price": "40 Kč/m²"
+            },
+            {
+                "service": "Barevná omítka stěn",
+                "price": "260 Kč/m²"
+            },
+            {
+                "service": "Použití marmolit stěn",
+                "price": "400 Kč/m²"
+            },
+            {
+                "service": "Podlepování stěn tl.20-40 mm",
+                "price": "150 Kč/m²"
+            },
+            {
+                "service": "Příplatek za použití zátok na kotvy",
+                "price": "10 Kč/m²"
+            }
+        ]
+    },
+    "obklady": {
+        "title": "OBKLADY A DLAŽBY",
+        "icon": "fas fa-th-large",
+        "items": [
+            {
+                "service": "Penetrace podkladu pod dlažby a obklady",
+                "price": "20 Kč/m²"
+            },
+            {
+                "service": "Hydroizolace nátěrová pod obklady a dlažby - jeden nátěr",
+                "price": "150 Kč/m²"
+            },
+            {
+                "service": "Hydroizolace nátěrová pod obklady a dlažby - ve dvou nátěrech",
+                "price": "200 Kč/m²"
+            },
+            {
+                "service": "Montáž obkladů stěn - malý formát (do 60 cm)",
+                "price": "600 Kč/m²"
+            },
+            {
+                "service": "Montáž obkladů stěn - střední formát (do 90 cm)",
+                "price": "700 Kč/m²"
+            },
+            {
+                "service": "Montáž obkladů stěn - velký formát (do 120 cm)",
+                "price": "800 Kč/m²"
+            },
+            {
+                "service": "Montáž keram.dlažby podlah - malý formát (do 60 cm)",
+                "price": "550 Kč/m²"
+            },
+            {
+                "service": "Montáž keram.dlažby podlah - střední formát (do 90 cm)",
+                "price": "650 Kč/m²"
+            },
+            {
+                "service": "Montáž keram.dlažby podlah - velký formát (do 120 cm)",
+                "price": "750 Kč/m²"
+            },
+            {
+                "service": "Montáž keram.dlažby schodů (stupnice a podstupnice bez lišty)",
+                "price": "800 Kč/bm"
+            },
+            {
+                "service": "Montáž podlahových lišt nebo dilatačních",
+                "price": "75 Kč/bm"
+            },
+            {
+                "service": "Montáž lišt k obkladům",
+                "price": "75 Kč/bm"
+            },
+            {
+                "service": "Montáž listell",
+                "price": "50 Kč/ks"
+            },
+            {
+                "service": "Kamenný roh - řezání obkladů na 45°",
+                "price": "1000 Kč/bm"
+            },
+            {
+                "service": "Obklady soklů keram.rovných, spárování, výška do 10 cm",
+                "price": "80 Kč/bm"
+            },
+            {
+                "service": "Řezání dlaždic keramických pro sokly - ručním řezačem",
+                "price": "50 Kč/bm"
+            },
+            {
+                "service": "Řezání dlaždic keramických pro sokly - stolním řezačem",
+                "price": "65 Kč/bm"
+            },
+            {
+                "service": "Silikonování rohu",
+                "price": "40 Kč/bm"
+            },
+            {
+                "service": "Průchod obkladem kulatý od 30 do DN 60 mm",
+                "price": "50 Kč/ks"
+            },
+            {
+                "service": "HZS zedníci-obkladači",
+                "price": "350 Kč/hod"
+            }
+        ]
+    },
+    "stropy": {
+        "title": "MONTOVANÉ STROPY",
+        "icon": "fas fa-layer-group",
+        "items": [
+            {
+                "service": "Montáž jednostranného bednění stropu (svisle ze strany výška do 50 cm (25 + 25 cm) - náhrada věncové)",
+                "price": "125 Kč/bm"
+            },
+            {
+                "service": "Montáž oboustranného bednění pro věnec (svisle ze strany výška do 50 cm (25 + 25 cm)",
+                "price": "250 Kč/bm"
+            },
+            {
+                "service": "Demontáž jednostranného bednění stropu (svisle ze strany výška do 50 cm (25 + 25 cm) - náhrada věncové)",
+                "price": "75 Kč/bm"
+            },
+            {
+                "service": "Demontáž oboustranného bednění pro věnec (svisle ze strany výška do 50 cm (25 + 25 cm)",
+                "price": "150 Kč/bm"
+            },
+            {
+                "service": "Vázání armovacích prvků věnců z ocelových prutů tl-6-8 mm a armovacích prutů 10-14 mm",
+                "price": "150 Kč/bm"
+            },
+            {
+                "service": "Doarmování věnců z předem připravených prvků vč.spojování a rohového svázání L pruty",
+                "price": "50 Kč/bm"
+            },
+            {
+                "service": "Montáž podpěrné konstrukce pro stropy montované z bet.nosníků a vložek",
+                "price": "75 Kč/m²"
+            },
+            {
+                "service": "Montáž stropu montovaného z nosníků a vložek betonových tloušťky 190 - 260 mm, OVN 555 mm, délka nosníku 3,0 - 7,0 m",
+                "price": "400 Kč/m²"
+            },
+            {
+                "service": "Montáž výztuže stropu KARI-SÍŤ 150x150x6 mm",
+                "price": "50 Kč/m²"
+            },
+            {
+                "service": "Betonování stropu (betonová mazanina - nabetonování v tl.50-70 mm) vč.vyplnění stropních nosníků a věnců",
+                "price": "130 Kč/m²"
+            }
+        ]
+    },
+    "vyzdivky": {
+        "title": "ZDĚNÍ",
+        "icon": "fas fa-cubes",
+        "items": [
+            {
+                "service": "Zdivo nosné keramické tl. 175 mm",
+                "price": "285 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické tl. 190 mm",
+                "price": "300 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické - AKU tl. 190 mm",
+                "price": "325 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické tl. 240/250 mm",
+                "price": "325 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické - AKU tl. 240/250 mm",
+                "price": "350 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické tl. 300 mm",
+                "price": "350 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické - AKU tl. 300 mm",
+                "price": "375 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické - tl. 380 mm",
+                "price": "400 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické tl. 400 mm",
+                "price": "425 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické tl. 440 mm",
+                "price": "450 Kč/m²"
+            },
+            {
+                "service": "Zdivo nosné keramické tl. 500",
+                "price": "475 Kč/m²"
+            },
+            {
+                "service": "Příčky keramické tl.80 -115mm",
+                "price": "265 Kč/m²"
+            },
+            {
+                "service": "Příčky keramické tl.120-150mm",
+                "price": "275 Kč/m²"
+            },
+            {
+                "service": "Zdivo z bloků se zalitím betonovou směsí (tl. 100mm)",
+                "price": "340 Kč/m²"
+            },
+            {
+                "service": "Zdivo z bloků se zalitím betonovou směsí (tl. 150mm)",
+                "price": "370 Kč/m²"
+            },
+            {
+                "service": "Zdivo z bloků se zalitím betonovou směsí (tl. 200mm)",
+                "price": "400 Kč/m²"
+            },
+            {
+                "service": "Zdivo z bloků se zalitím betonovou směsí (tl. 250mm)",
+                "price": "430 Kč/m²"
+            },
+            {
+                "service": "Zdivo z bloků se zalitím betonovou směsí (tl. 300mm)",
+                "price": "460 Kč/m²"
+            },
+            {
+                "service": "Zdivo z bloků se zalitím betonovou směsí (tl. 400mm)",
+                "price": "490 Kč/m²"
+            },
+            {
+                "service": "Příčky Ytong tl. 75 – 125 mm",
+                "price": "265 Kč/m²"
+            },
+            {
+                "service": "Příčky Ytong tl. 150-175 mm",
+                "price": "275 Kč/m²"
+            },
+            {
+                "service": "Zdivo Ytong tl. 200 mm",
+                "price": "300 Kč/m²"
+            },
+            {
+                "service": "Zdivo Ytong tl. 250 mm",
+                "price": "325 Kč/m²"
+            },
+            {
+                "service": "Zdivo Ytong tl. 300 mm",
+                "price": "350 Kč/m²"
+            },
+            {
+                "service": "Montáž překladu délky do 150 cm",
+                "price": "150 Kč/ks"
+            },
+            {
+                "service": "Montáž překladu délky do 200 cm",
+                "price": "200 Kč/ks"
+            },
+            {
+                "service": "Montáž překladu délky do 250 cm",
+                "price": "250 Kč/ks"
+            },
+            {
+                "service": "Montáž překladu délky do 300 cm",
+                "price": "300 Kč/ks"
+            },
+            {
+                "service": "Montáž překladu délky do 350 cm",
+                "price": "350 Kč/ks"
+            },
+            {
+                "service": "Neměřené zednické práce",
+                "price": "300 Kč/hod"
+            },
+            {
+                "service": "Příplatek za obezdění GEBERIT",
+                "price": "500 Kč/ks"
+            },
+            {
+                "service": "Příplatek za obezdění INSTAL.ŠACHET",
+                "price": "220 Kč/m²"
+            },
+            {
+                "service": "Míchání malty ručně mixérem nebo v míchačce (když na stavbě nebude kontinuální míchačka napojená na silo)",
+                "price": "1500 Kč/m³"
+            },
+            {
+                "service": "Vkládání pytlů ručně do kontinuální míchačky (když na stavbě nebude kontinuální míchačka napojená na silo)",
+                "price": "20 Kč/m²"
+            },
+            {
+                "service": "Montáž lepenky pod zdivo tl.50-175 mm",
+                "price": "20 Kč/bm"
+            },
+            {
+                "service": "Montáž lepenky pod zdivo tl.200-300 mm",
+                "price": "25 Kč/bm"
+            },
+            {
+                "service": "Montáž lepenky pod zdivo 350-500 mm",
+                "price": "30 Kč/bm"
+            },
+            {
+                "service": "Kotvení zdiva tl.75-150 mm u stropu PU pěnou",
+                "price": "15 Kč/bm"
+            },
+            {
+                "service": "Kotvení zdiva tl.175-300 mm u stropu PU pěnou",
+                "price": "30 Kč/bm"
+            },
+            {
+                "service": "Kotvení nosného zdiva k bet.konstrukci",
+                "price": "50 Kč/bm"
+            },
+            {
+                "service": "Kotvení příček k nosnému zdivu nebo bet.konstrukci",
+                "price": "25 Kč/bm"
+            },
+            {
+                "service": "Kotvení nosného zdiva u stropu MW tl.do 40 mm",
+                "price": "75 Kč/bm"
+            },
+            {
+                "service": "Kotvení příček u stropu MW tl.do 40 mm",
+                "price": "50 Kč/bm"
+            },
+            {
+                "service": "Řezání cihel tl. do 115 mm",
+                "price": "15 Kč/bm"
+            },
+            {
+                "service": "Řezání cihel AKU tl. do 115 mm",
+                "price": "20 Kč/bm"
+            },
+            {
+                "service": "Řezání cihel tl. do 150 mm",
+                "price": "20 Kč/bm"
+            },
+            {
+                "service": "Řezání cihel AKU tl. do 150 mm",
+                "price": "30 Kč/bm"
+            },
+            {
+                "service": "Řezání cihel tl. do 250 mm",
+                "price": "30 Kč/bm"
+            },
+            {
+                "service": "Řezání cihel AKU tl. do 250 mm",
+                "price": "35 Kč/bm"
+            },
+            {
+                "service": "Řezání cihel tl. do 300 mm",
+                "price": "35 Kč/bm"
+            },
+            {
+                "service": "Řezání cihel AKU tl. do 300 mm",
+                "price": "40 Kč/bm"
+            }
+        ]
+    }
+}

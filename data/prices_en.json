@@ -1,0 +1,536 @@
+{
+    "komunikace": {
+        "title": "COMMUNICATIONS AND REINFORCED SURFACES",
+        "icon": "fas fa-road",
+        "items": [
+            {
+                "service": "Installation of interlocking pavement 60mm thick into gravel up to 50mm thick (including manual transport of pavement/gravel up to 5m)",
+                "price": "195–205 CZK/m²"
+            },
+            {
+                "service": "Installation of interlocking pavement 80mm thick into gravel up to 50mm thick (including manual transport of pavement/gravel up to 5m)",
+                "price": "205–215 CZK/m²"
+            },
+            {
+                "service": "Installation of interlocking pavement 100mm thick into gravel up to 50mm thick (including manual transport of pavement/gravel up to 5m)",
+                "price": "215–225 CZK/m²"
+            },
+            {
+                "service": "Installation of garden/sidewalk curb into concrete bed",
+                "price": "180–190 CZK/lm"
+            },
+            {
+                "service": "Installation of road/driveway curb into concrete bed",
+                "price": "190–200 CZK/lm"
+            },
+            {
+                "service": "Installation of road curb (curved) into concrete bed",
+                "price": "225–250 CZK/lm"
+            },
+            {
+                "service": "Installation of pavement for drainage strip up to 60cm wide (including manual transport of pavement up to 5m)",
+                "price": "175 CZK/lm"
+            },
+            {
+                "service": "Cutting of surface pavement 50x50, 60x60cm 20-50mm thick (drainage strip)",
+                "price": "65 CZK/lm"
+            },
+            {
+                "service": "Cutting of interlocking pavement 60mm thick (finishing cuts)",
+                "price": "75 CZK/lm"
+            },
+            {
+                "service": "Cutting of interlocking pavement 80mm thick (finishing cuts)",
+                "price": "85 CZK/lm"
+            },
+            {
+                "service": "Cutting of interlocking pavement 100mm thick (finishing cuts)",
+                "price": "95 CZK/lm"
+            },
+            {
+                "service": "Manual transport of covering materials (wheelbarrow) when stored material distance is more than 5m up to 20m",
+                "price": "650 CZK/t"
+            },
+            {
+                "service": "Compaction of subgrade with vibrating plate up to 400kg",
+                "price": "25 CZK/m²"
+            },
+            {
+                "service": "Compaction of subgrade with vibrating roller up to 1,450kg",
+                "price": "40 CZK/m²"
+            },
+            {
+                "service": "Gravel base up to 100mm thick under reinforced surfaces incl. compaction (including manual transport of gravel up to 5m)",
+                "price": "40 CZK/m²"
+            },
+            {
+                "service": "Gravel base up to 150mm thick under reinforced surfaces incl. compaction (including manual transport of gravel up to 5m)",
+                "price": "50 CZK/m²"
+            },
+            {
+                "service": "Gravel base up to 200mm thick under reinforced surfaces incl. compaction (including manual transport of gravel up to 5m)",
+                "price": "60 CZK/m²"
+            },
+            {
+                "service": "Gravel base up to 250mm thick under reinforced surfaces incl. compaction (including manual transport of gravel up to 5m)",
+                "price": "70 CZK/m²"
+            },
+            {
+                "service": "Earthwork under curb depth up to 30cm (including manual transport of excavated material up to 10m)",
+                "price": "125 CZK/m²"
+            },
+            {
+                "service": "Cutting of road curb for curve",
+                "price": "30 CZK/cut"
+            },
+            {
+                "service": "Concrete demolition",
+                "price": "2750–3500 CZK/m³"
+            },
+            {
+                "service": "Material transport with own vehicle/container 3.5t (gravel, sand, concrete etc.)",
+                "price": "850 CZK/hour"
+            },
+            {
+                "service": "Material transport with own vehicle/container 7.5t (gravel, sand, concrete etc.)",
+                "price": "950 CZK/hour"
+            },
+            {
+                "service": "Mechanized transport of covering materials (UNC)",
+                "price": "250 CZK/t"
+            },
+            {
+                "service": "Work with own UNC (without transport to site)",
+                "price": "700 CZK/hour"
+            },
+            {
+                "service": "Terrain leveling",
+                "price": "30–50 CZK/m²"
+            },
+            {
+                "service": "Unmeasured work in hourly rate",
+                "price": "325 CZK/hour"
+            }
+        ]
+    },
+    "kzs": {
+        "title": "CONTACT THERMAL INSULATION SYSTEMS (ETICS)",
+        "icon": "fas fa-building",
+        "items": [
+            {
+                "service": "Covering of opening fill",
+                "price": "40 CZK/m²"
+            },
+            {
+                "service": "Installation of foundation strip",
+                "price": "100 CZK/lm"
+            },
+            {
+                "service": "Facade insulation (polystyrene) complete",
+                "price": "850–950 CZK/m²"
+            },
+            {
+                "service": "Facade insulation (mineral wool) complete",
+                "price": "1200–1500 CZK/m²"
+            },
+            {
+                "service": "Transport of materials (EPS or MW)",
+                "price": "7–10 CZK/m² (3-4%)"
+            },
+            {
+                "service": "Surcharge for using marmolit walls (mosaic)",
+                "price": "150 CZK/m²"
+            },
+            {
+                "service": "Unmeasured work in hourly rate",
+                "price": "275 CZK/hour"
+            },
+            {
+                "service": "Installation of corner strips with mesh",
+                "price": "30 CZK/lm"
+            },
+            {
+                "service": "Installation of APU strips with mesh",
+                "price": "25 CZK/lm"
+            },
+            {
+                "service": "Installation of EPS walls",
+                "price": "350 CZK/m²"
+            },
+            {
+                "service": "Installation of MW walls",
+                "price": "400 CZK/m²"
+            },
+            {
+                "service": "Reinforcement layer 1 (mesh in adhesive)",
+                "price": "200 CZK/m²"
+            },
+            {
+                "service": "Reinforcement layer 2 (putty only)",
+                "price": "100 CZK/m²"
+            },
+            {
+                "service": "Wall penetration",
+                "price": "40 CZK/m²"
+            },
+            {
+                "service": "Colored wall plaster",
+                "price": "260 CZK/m²"
+            },
+            {
+                "service": "Use of marmolit walls",
+                "price": "400 CZK/m²"
+            },
+            {
+                "service": "Wall underlayment 20-40mm thick",
+                "price": "150 CZK/m²"
+            },
+            {
+                "service": "Surcharge for using plugs for anchors",
+                "price": "10 CZK/m²"
+            }
+        ]
+    },
+    "obklady": {
+        "title": "TILING AND CLADDING",
+        "icon": "fas fa-th-large",
+        "items": [
+            {
+                "service": "Substrate penetration under tiles and cladding",
+                "price": "20 CZK/m²"
+            },
+            {
+                "service": "Waterproofing coating under tiles and cladding - one coat",
+                "price": "150 CZK/m²"
+            },
+            {
+                "service": "Waterproofing coating under tiles and cladding - two coats",
+                "price": "200 CZK/m²"
+            },
+            {
+                "service": "Wall cladding installation - small format (up to 60cm)",
+                "price": "600 CZK/m²"
+            },
+            {
+                "service": "Wall cladding installation - medium format (up to 90cm)",
+                "price": "700 CZK/m²"
+            },
+            {
+                "service": "Wall cladding installation - large format (up to 120cm)",
+                "price": "800 CZK/m²"
+            },
+            {
+                "service": "Ceramic floor tiling installation - small format (up to 60cm)",
+                "price": "550 CZK/m²"
+            },
+            {
+                "service": "Ceramic floor tiling installation - medium format (up to 90cm)",
+                "price": "650 CZK/m²"
+            },
+            {
+                "service": "Ceramic floor tiling installation - large format (up to 120cm)",
+                "price": "750 CZK/m²"
+            },
+            {
+                "service": "Ceramic stair tiling installation (tread and riser without strip)",
+                "price": "800 CZK/lm"
+            },
+            {
+                "service": "Installation of floor strips or expansion strips",
+                "price": "75 CZK/lm"
+            },
+            {
+                "service": "Installation of cladding strips",
+                "price": "75 CZK/lm"
+            },
+            {
+                "service": "Installation of listels",
+                "price": "50 CZK/pc"
+            },
+            {
+                "service": "Stone corner - cutting cladding at 45°",
+                "price": "1000 CZK/lm"
+            },
+            {
+                "service": "Ceramic straight baseboard cladding, grouting, height up to 10cm",
+                "price": "80 CZK/lm"
+            },
+            {
+                "service": "Cutting ceramic tiles for baseboards - manual cutter",
+                "price": "50 CZK/lm"
+            },
+            {
+                "service": "Cutting ceramic tiles for baseboards - table cutter",
+                "price": "65 CZK/lm"
+            },
+            {
+                "service": "Corner siliconing",
+                "price": "40 CZK/lm"
+            },
+            {
+                "service": "Round cladding passage from 30 to DN 60mm",
+                "price": "50 CZK/pc"
+            },
+            {
+                "service": "Hourly rate masons-tilers",
+                "price": "350 CZK/hour"
+            }
+        ]
+    },
+    "stropy": {
+        "title": "ASSEMBLED CEILINGS",
+        "icon": "fas fa-layer-group",
+        "items": [
+            {
+                "service": "Installation of single-sided ceiling formwork (vertically from side height up to 50cm (25 + 25cm) - ring beam replacement)",
+                "price": "125 CZK/lm"
+            },
+            {
+                "service": "Installation of double-sided formwork for ring beam (vertically from side height up to 50cm (25 + 25cm)",
+                "price": "250 CZK/lm"
+            },
+            {
+                "service": "Dismantling of single-sided ceiling formwork (vertically from side height up to 50cm (25 + 25cm) - ring beam replacement)",
+                "price": "75 CZK/lm"
+            },
+            {
+                "service": "Dismantling of double-sided formwork for ring beam (vertically from side height up to 50cm (25 + 25cm)",
+                "price": "150 CZK/lm"
+            },
+            {
+                "service": "Binding of ring beam reinforcement elements from steel bars 6-8mm thick and reinforcement bars 10-14mm",
+                "price": "150 CZK/lm"
+            },
+            {
+                "service": "Additional reinforcement of ring beams from pre-prepared elements incl. joining and corner binding with L bars",
+                "price": "50 CZK/lm"
+            },
+            {
+                "service": "Installation of support structure for ceilings assembled from concrete beams and inserts",
+                "price": "75 CZK/m²"
+            },
+            {
+                "service": "Installation of ceiling assembled from beams and concrete inserts thickness 190-260mm, OVN 555mm, beam length 3.0-7.0m",
+                "price": "400 CZK/m²"
+            },
+            {
+                "service": "Installation of ceiling reinforcement KARI-MESH 150x150x6mm",
+                "price": "50 CZK/m²"
+            },
+            {
+                "service": "Ceiling concreting (concrete screed - concreting in 50-70mm thickness) incl. filling ceiling beams and ring beams",
+                "price": "130 CZK/m²"
+            }
+        ]
+    },
+    "vyzdivky": {
+        "title": "MASONRY",
+        "icon": "fas fa-cubes",
+        "items": [
+            {
+                "service": "Load-bearing ceramic masonry 175mm thick",
+                "price": "285 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry 190mm thick",
+                "price": "300 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry - AKU 190mm thick",
+                "price": "325 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry 240/250mm thick",
+                "price": "325 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry - AKU 240/250mm thick",
+                "price": "350 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry 300mm thick",
+                "price": "350 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry - AKU 300mm thick",
+                "price": "375 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry - 380mm thick",
+                "price": "400 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry 400mm thick",
+                "price": "425 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry 440mm thick",
+                "price": "450 CZK/m²"
+            },
+            {
+                "service": "Load-bearing ceramic masonry 500mm thick",
+                "price": "475 CZK/m²"
+            },
+            {
+                "service": "Ceramic partitions 80-115mm thick",
+                "price": "265 CZK/m²"
+            },
+            {
+                "service": "Ceramic partitions 120-150mm thick",
+                "price": "275 CZK/m²"
+            },
+            {
+                "service": "Block masonry with concrete mixture filling (100mm thick)",
+                "price": "340 CZK/m²"
+            },
+            {
+                "service": "Block masonry with concrete mixture filling (150mm thick)",
+                "price": "370 CZK/m²"
+            },
+            {
+                "service": "Block masonry with concrete mixture filling (200mm thick)",
+                "price": "400 CZK/m²"
+            },
+            {
+                "service": "Block masonry with concrete mixture filling (250mm thick)",
+                "price": "430 CZK/m²"
+            },
+            {
+                "service": "Block masonry with concrete mixture filling (300mm thick)",
+                "price": "460 CZK/m²"
+            },
+            {
+                "service": "Block masonry with concrete mixture filling (400mm thick)",
+                "price": "490 CZK/m²"
+            },
+            {
+                "service": "Ytong partitions 75-125mm thick",
+                "price": "265 CZK/m²"
+            },
+            {
+                "service": "Ytong partitions 150-175mm thick",
+                "price": "275 CZK/m²"
+            },
+            {
+                "service": "Ytong masonry 200mm thick",
+                "price": "300 CZK/m²"
+            },
+            {
+                "service": "Ytong masonry 250mm thick",
+                "price": "325 CZK/m²"
+            },
+            {
+                "service": "Ytong masonry 300mm thick",
+                "price": "350 CZK/m²"
+            },
+            {
+                "service": "Installation of lintel up to 150cm length",
+                "price": "150 CZK/pc"
+            },
+            {
+                "service": "Installation of lintel up to 200cm length",
+                "price": "200 CZK/pc"
+            },
+            {
+                "service": "Installation of lintel up to 250cm length",
+                "price": "250 CZK/pc"
+            },
+            {
+                "service": "Installation of lintel up to 300cm length",
+                "price": "300 CZK/pc"
+            },
+            {
+                "service": "Installation of lintel up to 350cm length",
+                "price": "350 CZK/pc"
+            },
+            {
+                "service": "Unmeasured masonry work",
+                "price": "300 CZK/hour"
+            },
+            {
+                "service": "Surcharge for GEBERIT encasement",
+                "price": "500 CZK/pc"
+            },
+            {
+                "service": "Surcharge for INSTALLATION SHAFT encasement",
+                "price": "220 CZK/m²"
+            },
+            {
+                "service": "Manual mortar mixing with mixer or in mixer (when there is no continuous mixer connected to silo on site)",
+                "price": "1500 CZK/m³"
+            },
+            {
+                "service": "Manual bag loading into continuous mixer (when there is no continuous mixer connected to silo on site)",
+                "price": "20 CZK/m²"
+            },
+            {
+                "service": "Installation of felt under masonry 50-175mm thick",
+                "price": "20 CZK/lm"
+            },
+            {
+                "service": "Installation of felt under masonry 200-300mm thick",
+                "price": "25 CZK/lm"
+            },
+            {
+                "service": "Installation of felt under masonry 350-500mm thick",
+                "price": "30 CZK/lm"
+            },
+            {
+                "service": "Anchoring masonry 75-150mm thick at ceiling with PU foam",
+                "price": "15 CZK/lm"
+            },
+            {
+                "service": "Anchoring masonry 175-300mm thick at ceiling with PU foam",
+                "price": "30 CZK/lm"
+            },
+            {
+                "service": "Anchoring load-bearing masonry to concrete structure",
+                "price": "50 CZK/lm"
+            },
+            {
+                "service": "Anchoring partitions to load-bearing masonry or concrete structure",
+                "price": "25 CZK/lm"
+            },
+            {
+                "service": "Anchoring load-bearing masonry at ceiling MW up to 40mm thick",
+                "price": "75 CZK/lm"
+            },
+            {
+                "service": "Anchoring partitions at ceiling MW up to 40mm thick",
+                "price": "50 CZK/lm"
+            },
+            {
+                "service": "Cutting bricks up to 115mm thick",
+                "price": "15 CZK/lm"
+            },
+            {
+                "service": "Cutting AKU bricks up to 115mm thick",
+                "price": "20 CZK/lm"
+            },
+            {
+                "service": "Cutting bricks up to 150mm thick",
+                "price": "20 CZK/lm"
+            },
+            {
+                "service": "Cutting AKU bricks up to 150mm thick",
+                "price": "30 CZK/lm"
+            },
+            {
+                "service": "Cutting bricks up to 250mm thick",
+                "price": "30 CZK/lm"
+            },
+            {
+                "service": "Cutting AKU bricks up to 250mm thick",
+                "price": "35 CZK/lm"
+            },
+            {
+                "service": "Cutting bricks up to 300mm thick",
+                "price": "35 CZK/lm"
+            },
+            {
+                "service": "Cutting AKU bricks up to 300mm thick",
+                "price": "40 CZK/lm"
+            }
+        ]
+    }
+}

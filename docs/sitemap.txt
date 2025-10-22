@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Главная страница -->
+  <url>
+    <loc>https://www.vistav.cz/</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- Альтернативные языковые версии -->
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.vistav.cz/" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://www.vistav.cz/?lang=uk" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.vistav.cz/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.vistav.cz/" />
+  </url>
+
+  <!-- О нас -->
+  <url>
+    <loc>https://www.vistav.cz/#about</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Услуги -->
+  <url>
+    <loc>https://www.vistav.cz/#services</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Портфолио -->
+  <url>
+    <loc>https://www.vistav.cz/#portfolio</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Контакты -->
+  <url>
+    <loc>https://www.vistav.cz/#contact</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Ceník -->
+  <url>
+    <loc>https://www.vistav.cz/price_dynamic.php</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://www.vistav.cz/price_dynamic.php" />
+    <xhtml:link rel="alternate" hreflang="uk" href="https://www.vistav.cz/price_dynamic.php?lang=uk" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.vistav.cz/price_dynamic.php?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.vistav.cz/price_dynamic.php" />
+  </url>
+
+</urlset>

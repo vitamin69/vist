@@ -1,0 +1,12 @@
+{
+    "allowed_ips": [
+        "127.0.0.1",
+        "::1"
+    ],
+    "max_login_attempts": 5,
+    "lockout_duration": 900,
+    "session_timeout": 3600,
+    "enable_ip_whitelist": false,
+    "enable_rate_limiting": true,
+    "enable_logging": true
+}

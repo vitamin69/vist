@@ -1,0 +1,276 @@
+{
+    "zpevnene-plochy": {
+        "title": "ZPEVNĚNÉ PLOCHY A DLAŽBA",
+        "icon": "fas fa-road",
+        "items": [
+            {
+                "service": "Montáž zámkové dlažby 555",
+                "price": "00008–145 Kč\/m²"
+            },
+            {
+                "service": "Osazení chodníkového obrubníku do betonového lože",
+                "price": "125–155 Kč\/mb"
+            },
+            {
+                "service": "Bourání betonu",
+                "price": "1500 Kč\/m³"
+            },
+            {
+                "service": "Řezání zámkové dlažby (dořezy)",
+                "price": "65–75 Kč\/mb"
+            },
+            {
+                "service": "Přesun hmot pro kryt dlážděny ručně (kolečko)",
+                "price": "250 Kč\/t"
+            },
+            {
+                "service": "Přesun hmot pro kryt dlážděny strojně (UNC)",
+                "price": "150 Kč\/t"
+            },
+            {
+                "service": "Práce na vlastním UNC (bez dopravy na stavbu)",
+                "price": "500 Kč\/hod"
+            },
+            {
+                "service": "Úprava terénu",
+                "price": "20–40 Kč\/m²"
+            },
+            {
+                "service": "Nezměřitelné práce v HZS",
+                "price": "200 Kč\/hod"
+            }
+        ]
+    },
+    "fasady": {
+        "title": "FASÁDY",
+        "icon": "fas fa-building",
+        "items": [
+            {
+                "service": "Zateplení fasád (polystyrenem) komplet",
+                "price": "425–450 Kč\/m²"
+            },
+            {
+                "service": "Zateplení fasád (min. vatou) komplet",
+                "price": "475–525 Kč\/m²"
+            },
+            {
+                "service": "Příplatek za aplikaci marmolitu (mozaiky)",
+                "price": "100 Kč\/m²"
+            }
+        ]
+    },
+    "obklady": {
+        "title": "OBKLADY",
+        "icon": "fas fa-th",
+        "items": [
+            {
+                "service": "Hydroizolace pod obklady a dlažby",
+                "price": "85 Kč\/m²"
+            },
+            {
+                "service": "Montáž obkladů stěn",
+                "price": "450 Kč\/m²"
+            },
+            {
+                "service": "Montáž keram. dlažeb podlah",
+                "price": "400–700 Kč\/m²"
+            },
+            {
+                "service": "Montáž lišt (podlahových, k obkladům)",
+                "price": "50 Kč\/mb"
+            },
+            {
+                "service": "Montáž listel",
+                "price": "50 Kč\/ks"
+            }
+        ]
+    },
+    "betonove-potery": {
+        "title": "BETONOVÉ POTĚRY",
+        "icon": "fas fa-layer-group",
+        "items": [
+            {
+                "service": "Samovyrovnávací beton podlah MFC Portland 020 tl.50mm vč.materiálu",
+                "price": "425 Kč\/m²"
+            },
+            {
+                "service": "Betonování podlah – cementový potěr tl. 6,5 – 8 cm vč.materiálu",
+                "price": "650 Kč\/m²"
+            },
+            {
+                "service": "Lití anhydritových podlah tl.40 mm vč.materiálu",
+                "price": "350 Kč\/m²"
+            },
+            {
+                "service": "Montáž KARI-SÍTĚ 100x100x6 mm",
+                "price": "155 Kč\/m²"
+            },
+            {
+                "service": "Montáž tepelné nebo kročejové izolace podlah tl.do 50 mm-1 vrstva bez materiálu",
+                "price": "30 Kč\/m²"
+            },
+            {
+                "service": "Montáž tepelné nebo kročejové izolace podlah tl.do 50 mm-2 vrstva bez materiálu",
+                "price": "20 Kč\/m²"
+            },
+            {
+                "service": "Kročejová izolace podlah POLYSTYREN T4000",
+                "price": "1750 Kč\/m²"
+            },
+            {
+                "service": "Kročejová izolace podlah MW KNAUF PTE",
+                "price": "3000 Kč\/m²"
+            },
+            {
+                "service": "Montáž mirelonové pásky tl.10 mm s folií u zdí",
+                "price": "25 Kč\/m²"
+            },
+            {
+                "service": "Montáž separační PE folie",
+                "price": "10 Kč\/m²"
+            },
+            {
+                "service": "Nezměřitelné zednické práce",
+                "price": "170 Kč\/hod"
+            }
+        ]
+    },
+    "sadrokartony": {
+        "title": "SÁDROKARTONY",
+        "icon": "fas fa-clipboard",
+        "items": [
+            {
+                "service": "Podhled rovný (1x záklop 12,5mm, bez izolace)",
+                "price": "260–300 Kč\/m²"
+            },
+            {
+                "service": "Podhled šikmý (1x záklop 12,5mm, bez izolace)",
+                "price": "320–360 Kč\/m²"
+            },
+            {
+                "service": "Podhled obloukový (2x záklop - RIFLEX 6mm)",
+                "price": "575 Kč\/m²"
+            },
+            {
+                "service": "Podhled montovaný přímo na OSB desky (1x záklop)",
+                "price": "180 Kč\/m²"
+            },
+            {
+                "service": "Montáž tepelné izolace podhledů (1 vrstva)",
+                "price": "50 Kč\/m²"
+            },
+            {
+                "service": "Příčka (bez izolace)",
+                "price": "280–440 Kč\/m²"
+            },
+            {
+                "service": "Příčka mezibytová (bez izolace)",
+                "price": "400 Kč\/m²"
+            },
+            {
+                "service": "Příčka bezpečnostní (bez izolace)",
+                "price": "390–475 Kč\/m²"
+            },
+            {
+                "service": "Montáž tepelné izolace příček (1 vrstva)",
+                "price": "40 Kč\/m²"
+            },
+            {
+                "service": "Předstěna volně stojící (bez izolace)",
+                "price": "200–240 Kč\/m²"
+            },
+            {
+                "service": "Předstěna kotvená (bez izolace)",
+                "price": "220–260 Kč\/m²"
+            },
+            {
+                "service": "Předstěna montovaná přímo na OSB desku (1x záklop)",
+                "price": "130 Kč\/m²"
+            },
+            {
+                "service": "Montáž tepelné izolace předstěn (1 vrstva)",
+                "price": "40 Kč\/m²"
+            },
+            {
+                "service": "Kastlík dvoustranný do 50cm (vč. al. rohu, bez izolace)",
+                "price": "325–400 Kč\/mb"
+            },
+            {
+                "service": "Kastlík třístranný do 50cm (vč. al. rohů, bez izolace)",
+                "price": "480–580 Kč\/mb"
+            },
+            {
+                "service": "Kastlík čtyřstranný do 50cm (vč. al. rohů, bez izolace)",
+                "price": "600–750 Kč\/mb"
+            },
+            {
+                "service": "Obložení dřevěného trámu čtyřstraně bez kce (vč. al.rohů)",
+                "price": "400–525 Kč\/mb"
+            },
+            {
+                "service": "Výřez samotných děr (např. pro světla, krabičky apod. do 200mm)",
+                "price": "20–40 Kč\/ks"
+            },
+            {
+                "service": "Montáž revizních dvířek",
+                "price": "150–175 Kč\/ks"
+            },
+            {
+                "service": "Montáž akrylátu",
+                "price": "30 Kč\/mb"
+            },
+            {
+                "service": "Montáž ocel. zárubně",
+                "price": "525 Kč\/ks"
+            },
+            {
+                "service": "Montáž pouzdra pro zasunovací dveře (JAP\/SDK)",
+                "price": "800 Kč\/ks"
+            },
+            {
+                "service": "Opláštění střešního okna (vč. al. rohů)",
+                "price": "950 Kč\/ks"
+            },
+            {
+                "service": "Montáž parotěsné fólie vč.přelepení",
+                "price": "20 Kč\/m²"
+            },
+            {
+                "service": "Osazení al. rohů včetně tmelení a broušení",
+                "price": "75–95 Kč\/mb"
+            },
+            {
+                "service": "Opláštění geberitu (kce + 2 desky)",
+                "price": "750 Kč\/ks"
+            },
+            {
+                "service": "Montáž dilatace",
+                "price": "100 Kč\/mb"
+            },
+            {
+                "service": "Montáž výdřevy pro umyvadlo",
+                "price": "100 Kč\/ks"
+            },
+            {
+                "service": "Montáž výdřevy pro radiátor",
+                "price": "125 Kč\/ks"
+            },
+            {
+                "service": "Přesun materiálu (pokud není připraven v patře realizace)",
+                "price": "160 Kč\/hod"
+            },
+            {
+                "service": "Demontáž podhledu (1 x záklop)",
+                "price": "100–135 Kč\/m²"
+            },
+            {
+                "service": "Demontáž příčky (1 x záklop)",
+                "price": "125–150 Kč\/m²"
+            },
+            {
+                "service": "Demontáž izolace (1 vrstva)",
+                "price": "10 Kč\/m²"
+            }
+        ]
+    }
+}

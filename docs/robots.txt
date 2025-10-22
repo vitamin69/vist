@@ -1,0 +1,45 @@
+# robots.txt для Vistav s.r.o.
+# Этот файл указывает поисковым роботам, какие страницы можно индексировать
+
+User-agent: *
+Allow: /
+
+# Запрещаем индексацию служебных файлов
+Disallow: /php/handler.php
+Disallow: /leads.csv
+Disallow: /rate_limit.json
+Disallow: /errors.log
+Disallow: /*.json$
+Disallow: /*.log$
+
+# Разрешаем доступ к основным ресурсам
+Allow: /css/style.css
+Allow: /js/script.js
+Allow: /images/
+Allow: /fonts/
+
+# Указываем расположение карты сайта
+Sitemap: https://www.vistav.cz/sitemap.xml
+
+# Время задержки между запросами (в секундах)
+Crawl-delay: 1
+
+# Специальные настройки для разных поисковиков
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 1
+
+User-agent: Yandex
+Crawl-delay: 1
+
+# Блокируем вредоносных ботов
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

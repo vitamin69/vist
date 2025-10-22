@@ -1,0 +1,25 @@
+{
+  "bot_token": "8409424912:AAEXbjXXj-CsfODDSrAMr92ghsnU23nS_xA",
+  "chat_id": "341959137",
+  "enabled": true,
+  "message_template": {
+    "cs": "🏗️ *Nová zpráva z webu VISTAV s\\.r\\.o\\.*\n\n👤 *Jméno:* {name}\n📞 *Telefon:* {phone}\n📧 *Email:* {email}\n🏢 *Typ klienta:* {client_type}\n{company_info}🔧 *Služba:* {service}\n💬 *Zpráva:* {message}\n\n📅 *Datum:* {date}\n🌐 *IP:* {ip}",
+    "en": "🏗️ *New message from VISTAV s\\.r\\.o\\. website*\n\n👤 *Name:* {name}\n📞 *Phone:* {phone}\n📧 *Email:* {email}\n🏢 *Client type:* {client_type}\n{company_info}🔧 *Service:* {service}\n💬 *Message:* {message}\n\n📅 *Date:* {date}\n🌐 *IP:* {ip}"
+  },
+  "service_translations": {
+    "cs": {
+      "commercial": "Komerční výstavba",
+      "residential": "Nekomerční výstavba", 
+      "renovation": "Rekonstrukce a renovace",
+      "individual": "Fyzická osoba",
+      "company": "Společnost"
+    },
+    "en": {
+      "commercial": "Commercial construction",
+      "residential": "Residential construction",
+      "renovation": "Reconstruction and renovation", 
+      "individual": "Individual",
+      "company": "Company"
+    }
+  }
+}
