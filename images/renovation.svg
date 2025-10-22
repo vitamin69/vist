@@ -1,0 +1,61 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sky background -->
+  <rect width="400" height="300" fill="#87CEEB"/>
+  
+  <!-- Ground -->
+  <rect y="220" width="400" height="80" fill="#90EE90"/>
+  
+  <!-- Building under renovation -->
+  <rect x="80" y="120" width="240" height="100" fill="#D3D3D3" stroke="#A9A9A9" stroke-width="2"/>
+  
+  <!-- Scaffolding -->
+  <rect x="60" y="80" width="10" height="140" fill="#C0C0C0"/>
+  <rect x="120" y="80" width="10" height="140" fill="#C0C0C0"/>
+  <rect x="180" y="80" width="10" height="140" fill="#C0C0C0"/>
+  <rect x="240" y="80" width="10" height="140" fill="#C0C0C0"/>
+  <rect x="300" y="80" width="10" height="140" fill="#C0C0C0"/>
+  <rect x="340" y="80" width="10" height="140" fill="#C0C0C0"/>
+  
+  <!-- Horizontal scaffolding bars -->
+  <rect x="60" y="100" width="290" height="5" fill="#C0C0C0"/>
+  <rect x="60" y="140" width="290" height="5" fill="#C0C0C0"/>
+  <rect x="60" y="180" width="290" height="5" fill="#C0C0C0"/>
+  
+  <!-- Construction materials -->
+  <rect x="30" y="200" width="40" height="20" fill="#8B4513" stroke="#654321" stroke-width="1"/>
+  <rect x="35" y="195" width="30" height="5" fill="#D2691E"/>
+  
+  <!-- Tools -->
+  <rect x="360" y="200" width="15" height="3" fill="#8B4513"/>
+  <rect x="365" y="190" width="5" height="15" fill="#C0C0C0"/>
+  
+  <!-- Ladder -->
+  <rect x="370" y="120" width="5" height="100" fill="#8B4513"/>
+  <rect x="375" y="120" width="5" height="100" fill="#8B4513"/>
+  <rect x="370" y="130" width="10" height="3" fill="#8B4513"/>
+  <rect x="370" y="150" width="10" height="3" fill="#8B4513"/>
+  <rect x="370" y="170" width="10" height="3" fill="#8B4513"/>
+  <rect x="370" y="190" width="10" height="3" fill="#8B4513"/>
+  <rect x="370" y="210" width="10" height="3" fill="#8B4513"/>
+  
+  <!-- Windows being renovated -->
+  <rect x="100" y="140" width="25" height="30" fill="#FFFF00" stroke="#FFD700" stroke-width="2" opacity="0.7"/>
+  <rect x="140" y="140" width="25" height="30" fill="#4169E1" stroke="#000080" stroke-width="2"/>
+  <rect x="180" y="140" width="25" height="30" fill="#FFFF00" stroke="#FFD700" stroke-width="2" opacity="0.7"/>
+  <rect x="220" y="140" width="25" height="30" fill="#4169E1" stroke="#000080" stroke-width="2"/>
+  <rect x="260" y="140" width="25" height="30" fill="#FFFF00" stroke="#FFD700" stroke-width="2" opacity="0.7"/>
+  
+  <!-- Construction helmet -->
+  <ellipse cx="150" cy="90" rx="12" ry="8" fill="#FFD700" stroke="#FFA500" stroke-width="1"/>
+  
+  <!-- Paint bucket -->
+  <rect x="20" y="180" width="20" height="25" fill="#C0C0C0" stroke="#A9A9A9" stroke-width="1"/>
+  <rect x="22" y="175" width="16" height="5" fill="#FF6347"/>
+  
+  <!-- Clouds -->
+  <ellipse cx="100" cy="40" rx="25" ry="15" fill="white" opacity="0.8"/>
+  <ellipse cx="300" cy="30" rx="30" ry="18" fill="white" opacity="0.8"/>
+  
+  <!-- Text -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">Rekonstrukce</text>
+</svg>

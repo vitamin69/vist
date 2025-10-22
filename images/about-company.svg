@@ -1,0 +1,74 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="400" fill="#F8F9FA"/>
+  
+  <!-- Construction site background -->
+  <rect y="300" width="600" height="100" fill="#D2B48C"/>
+  
+  <!-- Main building under construction -->
+  <rect x="100" y="120" width="180" height="180" fill="#E6E6E6" stroke="#CCCCCC" stroke-width="2"/>
+  
+  <!-- Building framework -->
+  <line x1="120" y1="120" x2="120" y2="300" stroke="#8B4513" stroke-width="3"/>
+  <line x1="160" y1="120" x2="160" y2="300" stroke="#8B4513" stroke-width="3"/>
+  <line x1="200" y1="120" x2="200" y2="300" stroke="#8B4513" stroke-width="3"/>
+  <line x1="240" y1="120" x2="240" y2="300" stroke="#8B4513" stroke-width="3"/>
+  <line x1="260" y1="120" x2="260" y2="300" stroke="#8B4513" stroke-width="3"/>
+  
+  <line x1="100" y1="150" x2="280" y2="150" stroke="#8B4513" stroke-width="3"/>
+  <line x1="100" y1="200" x2="280" y2="200" stroke="#8B4513" stroke-width="3"/>
+  <line x1="100" y1="250" x2="280" y2="250" stroke="#8B4513" stroke-width="3"/>
+  
+  <!-- Crane -->
+  <rect x="320" y="50" width="8" height="250" fill="#FFD700"/>
+  <rect x="300" y="50" width="50" height="8" fill="#FFD700"/>
+  <line x1="350" y1="50" x2="450" y2="50" stroke="#FFD700" stroke-width="4"/>
+  <line x1="450" y1="50" x2="420" y2="80" stroke="#FFD700" stroke-width="2"/>
+  
+  <!-- Hook and load -->
+  <line x1="380" y1="50" x2="380" y2="90" stroke="#333" stroke-width="2"/>
+  <rect x="370" y="90" width="20" height="15" fill="#8B4513" stroke="#654321" stroke-width="1"/>
+  
+  <!-- Workers (simplified) -->
+  <circle cx="150" cy="280" r="8" fill="#FFDBAC"/>
+  <rect x="145" y="288" width="10" height="12" fill="#FF6B35"/>
+  <circle cx="150" cy="275" r="6" fill="#FFD700"/> <!-- Hard hat -->
+  
+  <circle cx="220" cy="285" r="8" fill="#FFDBAC"/>
+  <rect x="215" y="293" width="10" height="7" fill="#4169E1"/>
+  <circle cx="220" cy="280" r="6" fill="#FFD700"/> <!-- Hard hat -->
+  
+  <!-- Tools and materials -->
+  <rect x="50" y="280" width="30" height="20" fill="#8B4513" stroke="#654321" stroke-width="1"/>
+  <rect x="55" y="275" width="20" height="5" fill="#D2691E"/>
+  
+  <!-- Wheelbarrow -->
+  <rect x="350" y="285" width="25" height="10" fill="#C0C0C0"/>
+  <circle cx="365" cy="300" r="8" fill="#333"/>
+  <rect x="340" y="280" width="15" height="3" fill="#8B4513"/>
+  
+  <!-- Safety signs -->
+  <rect x="450" y="250" width="30" height="30" fill="#FF4500" stroke="#8B0000" stroke-width="2"/>
+  <text x="465" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">!</text>
+  
+  <!-- Company logo area -->
+  <rect x="400" y="120" width="150" height="100" fill="white" stroke="#CCCCCC" stroke-width="2" rx="10"/>
+  <text x="475" y="150" text-anchor="middle" font-family="Roboto Slab, serif" font-size="24" font-weight="bold" fill="#37474F">VISTAV</text>
+  <text x="475" y="170" text-anchor="middle" font-family="Roboto, sans-serif" font-size="12" fill="#627276">s.r.o.</text>
+  <text x="475" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#666">15+ let</text>
+  <text x="475" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">zkušeností</text>
+  
+  <!-- Quality symbols -->
+  <circle cx="480" cy="280" r="20" fill="#4CAF50" stroke="#2E7D32" stroke-width="2"/>
+  <text x="480" y="287" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">✓</text>
+  
+  <circle cx="520" cy="280" r="20" fill="#2196F3" stroke="#1565C0" stroke-width="2"/>
+  <text x="520" y="287" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">ISO</text>
+  
+  <!-- Sky elements -->
+  <ellipse cx="100" cy="60" rx="25" ry="15" fill="white" opacity="0.8"/>
+  <ellipse cx="500" cy="40" rx="30" ry="18" fill="white" opacity="0.8"/>
+  
+  <!-- Text -->
+  <text x="300" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">Profesionální stavební služby</text>
+</svg>

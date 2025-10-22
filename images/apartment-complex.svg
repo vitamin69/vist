@@ -1,0 +1,87 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sky background -->
+  <rect width="400" height="300" fill="#87CEEB"/>
+  
+  <!-- Ground -->
+  <rect y="250" width="400" height="50" fill="#90EE90"/>
+  
+  <!-- Main apartment building -->
+  <rect x="50" y="50" width="150" height="200" fill="#F5DEB3" stroke="#D2B48C" stroke-width="2"/>
+  
+  <!-- Second building -->
+  <rect x="220" y="80" width="120" height="170" fill="#E6E6FA" stroke="#D8BFD8" stroke-width="2"/>
+  
+  <!-- Windows for main building (6 floors) -->
+  <!-- Floor 1 -->
+  <rect x="65" y="65" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="90" y="65" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="115" y="65" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="140" y="65" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="165" y="65" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  
+  <!-- Floor 2 -->
+  <rect x="65" y="95" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="90" y="95" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="115" y="95" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="140" y="95" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="165" y="95" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  
+  <!-- Floor 3 -->
+  <rect x="65" y="125" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="90" y="125" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="115" y="125" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="140" y="125" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="165" y="125" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  
+  <!-- Floor 4 -->
+  <rect x="65" y="155" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="90" y="155" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="115" y="155" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="140" y="155" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="165" y="155" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  
+  <!-- Floor 5 -->
+  <rect x="65" y="185" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="90" y="185" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="115" y="185" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="140" y="185" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="165" y="185" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  
+  <!-- Ground floor entrance -->
+  <rect x="110" y="215" width="30" height="35" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Windows for second building -->
+  <rect x="235" y="95" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="255" y="95" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="275" y="95" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="295" y="95" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  
+  <rect x="235" y="125" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="255" y="125" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="275" y="125" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="295" y="125" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  
+  <rect x="235" y="155" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="255" y="155" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="275" y="155" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="295" y="155" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  
+  <rect x="235" y="185" width="15" height="20" fill="#FFFF00" stroke="#FFD700" stroke-width="1"/>
+  <rect x="255" y="185" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="275" y="185" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  <rect x="295" y="185" width="15" height="20" fill="#4169E1" stroke="#000080" stroke-width="1"/>
+  
+  <!-- Entrance for second building -->
+  <rect x="265" y="215" width="25" height="35" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  
+  <!-- Balconies -->
+  <rect x="45" y="120" width="8" height="15" fill="#C0C0C0" stroke="#A9A9A9" stroke-width="1"/>
+  <rect x="45" y="180" width="8" height="15" fill="#C0C0C0" stroke="#A9A9A9" stroke-width="1"/>
+  
+  <!-- Clouds -->
+  <ellipse cx="80" cy="25" rx="20" ry="12" fill="white" opacity="0.8"/>
+  <ellipse cx="320" cy="35" rx="25" ry="15" fill="white" opacity="0.8"/>
+  
+  <!-- Text -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">Bytový komplex</text>
+</svg>

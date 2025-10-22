@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="building1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ea580c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="building2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="building3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="windowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0f2fe;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0.7" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky background -->
+  <rect width="400" height="300" fill="#e6f3ff"/>
+  
+  <!-- Ground -->
+  <rect x="0" y="240" width="400" height="60" fill="#22c55e"/>
+  
+  <!-- Walkways -->
+  <rect x="0" y="250" width="400" height="8" fill="#6b7280"/>
+  <rect x="150" y="240" width="8" height="20" fill="#6b7280"/>
+  <rect x="240" y="240" width="8" height="20" fill="#6b7280"/>
+  
+  <!-- Building 1 (Left) -->
+  <rect x="50" y="120" width="80" height="120" fill="url(#building1Grad)" stroke="#c2410c" stroke-width="2"/>
+  
+  <!-- Building 1 windows -->
+  <rect x="60" y="140" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="78" y="140" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="96" y="140" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="114" y="140" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <rect x="60" y="170" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="78" y="170" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="96" y="170" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="114" y="170" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <rect x="60" y="200" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="78" y="200" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="96" y="200" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="114" y="200" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <!-- Building 1 entrance -->
+  <rect x="85" y="220" width="20" height="20" fill="#1e40af" stroke="#1e3a8a" stroke-width="1"/>
+  
+  <!-- Building 2 (Center) -->
+  <rect x="160" y="80" width="80" height="160" fill="url(#building2Grad)" stroke="#0e7490" stroke-width="2"/>
+  
+  <!-- Building 2 windows (more floors) -->
+  <rect x="170" y="100" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="188" y="100" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="206" y="100" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="224" y="100" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <rect x="170" y="130" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="188" y="130" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="206" y="130" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="224" y="130" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <rect x="170" y="160" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="188" y="160" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="206" y="160" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="224" y="160" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <rect x="170" y="190" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="188" y="190" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="206" y="190" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="224" y="190" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <!-- Building 2 entrance -->
+  <rect x="190" y="220" width="20" height="20" fill="#1e40af" stroke="#1e3a8a" stroke-width="1"/>
+  
+  <!-- Building 3 (Right) -->
+  <rect x="270" y="100" width="80" height="140" fill="url(#building3Grad)" stroke="#6d28d9" stroke-width="2"/>
+  
+  <!-- Building 3 windows -->
+  <rect x="280" y="120" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="298" y="120" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="316" y="120" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="334" y="120" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <rect x="280" y="150" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="298" y="150" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="316" y="150" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="334" y="150" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <rect x="280" y="180" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="298" y="180" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="316" y="180" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="334" y="180" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <rect x="280" y="210" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="298" y="210" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="316" y="210" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  <rect x="334" y="210" width="12" height="15" fill="url(#windowGrad)" stroke="#0891b2" stroke-width="1"/>
+  
+  <!-- Building 3 entrance -->
+  <rect x="305" y="220" width="20" height="20" fill="#1e40af" stroke="#1e3a8a" stroke-width="1"/>
+  
+  <!-- Complex sign -->
+  <rect x="140" y="50" width="120" height="20" fill="#1e40af" stroke="#1e3a8a" stroke-width="2"/>
+  <text x="200" y="63" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">RESIDENTIAL COMPLEX</text>
+  
+  <!-- Landscaping -->
+  <circle cx="30" cy="220" r="15" fill="#22c55e"/>
+  <rect x="27" y="220" width="6" height="18" fill="#8b4513"/>
+  
+  <circle cx="380" cy="210" r="12" fill="#22c55e"/>
+  <rect x="378" y="210" width="4" height="15" fill="#8b4513"/>
+  
+  <!-- Benches -->
+  <rect x="120" y="260" width="20" height="8" fill="#8b4513"/>
+  <rect x="125" y="255" width="2" height="5" fill="#6b7280"/>
+  <rect x="133" y="255" width="2" height="5" fill="#6b7280"/>
+  
+  <rect x="260" y="260" width="20" height="8" fill="#8b4513"/>
+  <rect x="265" y="255" width="2" height="5" fill="#6b7280"/>
+  <rect x="273" y="255" width="2" height="5" fill="#6b7280"/>
+  
+  <!-- Playground equipment -->
+  <rect x="360" y="260" width="8" height="15" fill="#dc2626"/>
+  <rect x="355" y="270" width="18" height="3" fill="#fbbf24"/>
+  
+  <!-- Clouds -->
+  <ellipse cx="80" cy="30" rx="20" ry="12" fill="white" opacity="0.8"/>
+  <ellipse cx="320" cy="25" rx="25" ry="15" fill="white" opacity="0.8"/>
+</svg>
