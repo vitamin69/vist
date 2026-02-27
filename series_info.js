@@ -1,291 +1,216 @@
 /**
  * ============================================================
- *  SERIES INFO PLUGIN FOR LAMPA
+ *  SERIES INFO PLUGIN FOR LAMPA  v2.0
  *  Показує кількість сезонів та серій на картках серіалів/аніме
- *  Автор: Claude | Версія: 1.0.0
  * ============================================================
  */
-
 (function () {
     'use strict';
 
-    // ── Конфіг ──────────────────────────────────────────────
-    var PLUGIN_NAME  = 'series_info';
-    var TMDB_API     = 'https://api.themoviedb.org/3';
-    var TMDB_KEY     = '4ef0d7355d9ffb5151e987764708ce96'; // публічний ключ Lampa
-    var CACHE_TTL    = 60 * 60 * 24 * 3; // 3 дні в секундах
-    var cache        = {};
+    if (window.series_info_plugin_loaded) return;
+    window.series_info_plugin_loaded = true;
 
-    // ── CSS стилі значка ────────────────────────────────────
+    // ── Стилі ───────────────────────────────────────────────
     var CSS = [
-        '.series-info-badge {',
-        '  position: absolute;',
-        '  bottom: 6px;',
-        '  left: 6px;',
-        '  display: flex;',
-        '  align-items: center;',
-        '  gap: 4px;',
-        '  pointer-events: none;',
-        '  z-index: 10;',
+        '.si-badge{',
+        '  position:absolute;bottom:0;left:0;right:0;',
+        '  display:flex;flex-wrap:wrap;gap:3px;padding:5px;',
+        '  background:linear-gradient(transparent,rgba(0,0,0,.85));',
+        '  pointer-events:none;z-index:5;',
         '}',
-        '.series-info-badge__pill {',
-        '  background: rgba(0,0,0,0.72);',
-        '  backdrop-filter: blur(6px);',
-        '  -webkit-backdrop-filter: blur(6px);',
-        '  border-radius: 4px;',
-        '  padding: 2px 7px;',
-        '  font-size: 11px;',
-        '  font-weight: 600;',
-        '  color: #fff;',
-        '  line-height: 1.5;',
-        '  white-space: nowrap;',
-        '  letter-spacing: 0.02em;',
+        '.si-pill{',
+        '  font-size:.65em;font-weight:700;color:#fff;',
+        '  background:rgba(0,0,0,.55);border-radius:3px;',
+        '  padding:2px 6px;line-height:1.4;white-space:nowrap;',
         '}',
-        '.series-info-badge__pill--ended {',
-        '  background: rgba(40,180,99,0.82);',
-        '  color: #fff;',
-        '}',
-        '.series-info-badge__pill--seasons {',
-        '  background: rgba(30,120,220,0.80);',
-        '}',
-        '.series-info-badge__pill--episodes {',
-        '  background: rgba(0,0,0,0.72);',
-        '}'
-    ].join('\n');
+        '.si-pill--ended{background:rgba(34,160,80,.85);}',
+        '.si-pill--seasons{background:rgba(20,110,210,.75);}',
+        '.si-pill--eps{background:rgba(0,0,0,.55);}'
+    ].join('');
 
-    // ── Вставити стилі ──────────────────────────────────────
-    function injectStyles() {
-        if (document.getElementById('series-info-styles')) return;
+    function injectCSS() {
+        if (document.getElementById('si-css')) return;
         var s = document.createElement('style');
-        s.id  = 'series-info-styles';
+        s.id = 'si-css';
         s.textContent = CSS;
         document.head.appendChild(s);
     }
 
-    // ── Отримати дані з TMDB (з кешем) ──────────────────────
-    function fetchSeriesData(tmdbId, callback) {
-        var key = PLUGIN_NAME + '_tmdb_' + tmdbId;
+    // ── Кеш ─────────────────────────────────────────────────
+    var memCache = {};
+    var CACHE_DAYS = 3;
+    var TMDB_KEY = '4ef0d7355d9ffb5151e987764708ce96';
 
-        // Перевіряємо in-memory кеш
-        if (cache[tmdbId]) {
-            callback(cache[tmdbId]);
-            return;
-        }
-
-        // Перевіряємо Lampa Storage
+    function cacheGet(id) {
+        if (memCache[id]) return memCache[id];
         try {
-            var stored = Lampa.Storage.get(key);
-            if (stored && stored.time && (Date.now() / 1000 - stored.time) < CACHE_TTL) {
-                cache[tmdbId] = stored.data;
-                callback(stored.data);
-                return;
-            }
-        } catch (e) {}
-
-        // Запит до TMDB
-        var url = TMDB_API + '/tv/' + tmdbId + '?api_key=' + TMDB_KEY + '&language=uk-UA';
-
-        fetch(url)
-            .then(function (r) { return r.json(); })
-            .then(function (json) {
-                if (!json || json.success === false) return;
-
-                var info = {
-                    status:        json.status || '',
-                    seasons:       0,
-                    episodes:      json.number_of_episodes || 0,
-                    in_production: json.in_production || false
-                };
-
-                // Фільтруємо сезони (прибираємо «Specials» якщо season_number === 0)
-                if (json.seasons) {
-                    info.seasons = json.seasons.filter(function (s) {
-                        return s.season_number > 0;
-                    }).length;
+            var raw = Lampa.Storage.get('si_' + id, '');
+            if (raw) {
+                var obj = JSON.parse(raw);
+                if ((Date.now() / 1000 - obj.t) < CACHE_DAYS * 86400) {
+                    memCache[id] = obj.d;
+                    return obj.d;
                 }
-
-                cache[tmdbId] = info;
-
-                try {
-                    Lampa.Storage.set(key, { time: Date.now() / 1000, data: info });
-                } catch (e) {}
-
-                callback(info);
-            })
-            .catch(function () {});
+            }
+        } catch(e) {}
+        return null;
     }
 
-    // ── Побудувати HTML значка ───────────────────────────────
-    function buildBadgeHTML(info) {
-        var isEnded = info.status === 'Ended' || info.status === 'Canceled';
-        var parts   = [];
-
-        if (isEnded) {
-            parts.push('<span class="series-info-badge__pill series-info-badge__pill--ended">Завершено</span>');
-        }
-
-        if (info.seasons > 0) {
-            var sLabel = info.seasons + ' ' + pluralSeason(info.seasons);
-            parts.push('<span class="series-info-badge__pill series-info-badge__pill--seasons">' + sLabel + '</span>');
-        }
-
-        if (info.episodes > 0) {
-            var eLabel = info.episodes + ' ' + pluralEpisode(info.episodes);
-            parts.push('<span class="series-info-badge__pill series-info-badge__pill--episodes">' + eLabel + '</span>');
-        }
-
-        if (!parts.length) return '';
-        return '<div class="series-info-badge">' + parts.join('') + '</div>';
+    function cacheSet(id, data) {
+        memCache[id] = data;
+        try {
+            Lampa.Storage.set('si_' + id, JSON.stringify({t: Date.now() / 1000, d: data}));
+        } catch(e) {}
     }
 
-    // ── Відміни слів ────────────────────────────────────────
-    function pluralSeason(n) {
-        var mod10 = n % 10, mod100 = n % 100;
-        if (mod10 === 1 && mod100 !== 11)  return 'сезон';
-        if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return 'сезони';
-        return 'сезонів';
+    // ── TMDB запит через Lampa.Reguest ──────────────────────
+    function fetchInfo(tmdbId, cb) {
+        var cached = cacheGet(tmdbId);
+        if (cached) { cb(cached); return; }
+
+        var url = 'https://api.themoviedb.org/3/tv/' + tmdbId +
+                  '?api_key=' + TMDB_KEY + '&language=uk-UA';
+
+        Lampa.Reguest.silent(url, function(json) {
+            if (!json || !json.id) return;
+            var seasons = 0;
+            if (json.seasons) {
+                json.seasons.forEach(function(s) {
+                    if (s.season_number > 0) seasons++;
+                });
+            }
+            var info = {
+                status:   json.status || '',
+                seasons:  seasons,
+                episodes: json.number_of_episodes || 0
+            };
+            cacheSet(tmdbId, info);
+            cb(info);
+        }, function() {});
     }
 
-    function pluralEpisode(n) {
-        var mod10 = n % 10, mod100 = n % 100;
-        if (mod10 === 1 && mod100 !== 11)  return 'серія';
-        if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return 'серії';
-        return 'серій';
+    // ── Числівники ──────────────────────────────────────────
+    function ps(n) {
+        var m = n % 10, h = n % 100;
+        if (m===1 && h!==11) return n+' сезон';
+        if (m>=2 && m<=4 && (h<10||h>=20)) return n+' сезони';
+        return n+' сезонів';
+    }
+    function pe(n) {
+        var m = n % 10, h = n % 100;
+        if (m===1 && h!==11) return n+' серія';
+        if (m>=2 && m<=4 && (h<10||h>=20)) return n+' серії';
+        return n+' серій';
     }
 
-    // ── Знайти картки та додати значок ──────────────────────
-    function processCard(cardElement, cardData) {
-        if (!cardElement || !cardData) return;
+    // ── Додати значок до картки ──────────────────────────────
+    function addBadge(cardEl, info) {
+        if (cardEl.querySelector('.si-badge')) return;
 
-        // Тільки серіали та аніме
-        var mediaType = cardData.media_type || '';
-        var genreIds  = cardData.genre_ids  || [];
-        var isAnime   = genreIds.indexOf(16) !== -1; // 16 = Animation
+        var ended = info.status === 'Ended' || info.status === 'Canceled';
+        var html = '';
+        if (ended)         html += '<span class="si-pill si-pill--ended">✓ Завершено</span>';
+        if (info.seasons)  html += '<span class="si-pill si-pill--seasons">' + ps(info.seasons) + '</span>';
+        if (info.episodes) html += '<span class="si-pill si-pill--eps">' + pe(info.episodes) + '</span>';
+        if (!html) return;
 
-        if (mediaType !== 'tv' && !isAnime) {
-            // Якщо тип невідомий але є number_of_seasons — теж обробляємо
-            if (!cardData.number_of_seasons && !cardData.first_air_date) return;
-        }
+        var view = cardEl.querySelector('.card__view');
+        if (!view) return;
 
-        var tmdbId = cardData.id;
-        if (!tmdbId) return;
+        view.style.position = 'relative';
+        view.style.overflow = 'hidden';
+        var badge = document.createElement('div');
+        badge.className = 'si-badge';
+        badge.innerHTML = html;
+        view.appendChild(badge);
+    }
 
-        // Не додавати двічі
-        if (cardElement.querySelector('.series-info-badge')) return;
+    // ── Обробити картку через DOM елемент ────────────────────
+    function processCardEl(cardEl) {
+        if (cardEl.dataset.siDone) return;
+        cardEl.dataset.siDone = '1';
 
-        var poster = cardElement.querySelector('.card__img, .card__poster, .card__image');
-        if (!poster) return;
+        var data = cardEl._data || cardEl.data;
+        if (!data) return;
 
-        // Робимо poster position:relative якщо треба
-        var pos = window.getComputedStyle(poster).position;
-        if (pos === 'static') poster.style.position = 'relative';
+        var isTv = data.media_type === 'tv' || !!data.first_air_date;
+        if (!isTv) return;
 
-        fetchSeriesData(tmdbId, function (info) {
-            // Ще раз перевірити, раптом вже додали
-            if (cardElement.querySelector('.series-info-badge')) return;
-            var html = buildBadgeHTML(info);
-            if (html) poster.insertAdjacentHTML('beforeend', html);
+        var id = data.id;
+        if (!id) return;
+
+        fetchInfo(id, function(info) { addBadge(cardEl, info); });
+    }
+
+    // ── Сканувати DOM ────────────────────────────────────────
+    function scanAll() {
+        document.querySelectorAll('.card').forEach(function(el) {
+            processCardEl(el);
         });
     }
 
-    // ── Спостерігач за DOM (MutationObserver) ───────────────
-    var observer;
+    // ── MutationObserver ────────────────────────────────────
     function startObserver() {
-        if (observer) return;
-
-        observer = new MutationObserver(function (mutations) {
-            mutations.forEach(function (m) {
-                m.addedNodes.forEach(function (node) {
-                    if (node.nodeType !== 1) return;
-
-                    // Шукаємо картки всередині доданого вузла
-                    var cards = node.querySelectorAll
-                        ? node.querySelectorAll('.card')
-                        : [];
-
-                    // Якщо сам вузол є карткою
-                    if (node.classList && node.classList.contains('card')) {
-                        cards = [node];
+        new MutationObserver(function(muts) {
+            muts.forEach(function(m) {
+                m.addedNodes.forEach(function(n) {
+                    if (n.nodeType !== 1) return;
+                    if (n.classList && n.classList.contains('card')) {
+                        processCardEl(n);
+                    } else if (n.querySelectorAll) {
+                        n.querySelectorAll('.card').forEach(processCardEl);
                     }
-
-                    cards.forEach(function (card) {
-                        var dataRaw = card.dataset.card || card.getAttribute('data-card');
-                        if (!dataRaw) return;
-                        try {
-                            var data = JSON.parse(dataRaw);
-                            processCard(card, data);
-                        } catch (e) {}
-                    });
                 });
             });
-        });
-
-        observer.observe(document.body, { childList: true, subtree: true });
+        }).observe(document.body, {childList: true, subtree: true});
     }
 
-    // ── Перевірити вже існуючі картки ───────────────────────
-    function processExistingCards() {
-        var cards = document.querySelectorAll('.card[data-card]');
-        cards.forEach(function (card) {
+    // ── Хук через Lampa.Listener 'card' ─────────────────────
+    function hookCard() {
+        Lampa.Listener.follow('card', function(e) {
+            if (e.type !== 'complite' && e.type !== 'create') return;
+            if (!e.data) return;
+
+            var isTv = e.data.media_type === 'tv' || !!e.data.first_air_date;
+            if (!isTv) return;
+
+            var id = e.data.id;
+            if (!id) return;
+
+            // e.card.render() повертає jQuery/DOM елемент картки
+            var el = null;
             try {
-                var data = JSON.parse(card.getAttribute('data-card'));
-                processCard(card, data);
-            } catch (e) {}
+                var r = e.card.render();
+                el = (r && r[0]) ? r[0] : r;
+            } catch(err) {}
+            if (!el) return;
+            if (el.dataset.siDone) return;
+            el.dataset.siDone = '1';
+
+            fetchInfo(id, function(info) { addBadge(el, info); });
         });
     }
 
-    // ── Lampa event hooks ────────────────────────────────────
-    function initPlugin() {
-        injectStyles();
+    // ── Ініціалізація ────────────────────────────────────────
+    function init() {
+        injectCSS();
+        hookCard();
         startObserver();
-        processExistingCards();
+        setTimeout(scanAll, 800);
+
+        Lampa.Listener.follow('activity', function(e) {
+            if (e.type === 'start' || e.type === 'back' || e.type === 'resume') {
+                setTimeout(scanAll, 700);
+            }
+        });
     }
 
-    // ── Точка входу ─────────────────────────────────────────
-    if (window.Lampa) {
-        Lampa.Listener.follow('app', function (e) {
-            if (e.type === 'ready') {
-                initPlugin();
-            }
-        });
-
-        // Якщо додаток вже готовий
-        if (document.querySelector('.app__body')) {
-            initPlugin();
-        }
-
-        // Слухаємо відкриття каталогів / пошуку
-        Lampa.Listener.follow('full', function (e) {
-            if (e.type === 'complite' || e.type === 'ready') {
-                setTimeout(processExistingCards, 300);
-            }
-        });
-
-        Lampa.Listener.follow('feed', function () {
-            setTimeout(processExistingCards, 400);
-        });
-
-        // Маніфест плагіна (для магазину плагінів)
-        if (Lampa.Manifest) {
-            Lampa.Manifest.plugins = Lampa.Manifest.plugins || [];
-            Lampa.Manifest.plugins.push({
-                name:    'Series Info',
-                version: '1.0.0',
-                author:  'Claude',
-                desc:    'Показує кількість сезонів та серій на картках серіалів і аніме'
-            });
-        }
-
+    // ── Старт ────────────────────────────────────────────────
+    if (window.appready) {
+        init();
     } else {
-        // Якщо Lampa ще не завантажена — чекаємо
-        window.addEventListener('load', function () {
-            var tries = 0;
-            var wait  = setInterval(function () {
-                if (window.Lampa || ++tries > 20) {
-                    clearInterval(wait);
-                    if (window.Lampa) initPlugin();
-                }
-            }, 500);
+        Lampa.Listener.follow('app', function(e) {
+            if (e.type === 'ready') init();
         });
     }
 
