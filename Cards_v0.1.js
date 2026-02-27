@@ -1,24 +1,16 @@
 (function () {
   'use strict';
 
-  if (window.lampa_episodes_badge) return;
-  window.lampa_episodes_badge = true;
+  if (window.lampa_episodes_badge_v1) return;
+  window.lampa_episodes_badge_v1 = true;
 
-  // ---------- settings ----------
+  // ====== SETTINGS ======
   var SETTING_KEY = 'episodes_badge_enabled';
   var DEFAULT_ENABLED = true;
 
-  // ---------- helpers ----------
   function enabled() {
-    try {
-      return (Lampa.Storage.get(SETTING_KEY, DEFAULT_ENABLED) !== false);
-    } catch (e) {
-      return true;
-    }
-  }
-
-  function noty(txt) {
-    try { Lampa.Noty.show(String(txt)); } catch (e) {}
+    try { return Lampa.Storage.get(SETTING_KEY, DEFAULT_ENABLED) !== false; }
+    catch (e) { return true; }
   }
 
   function addSetting() {
@@ -27,40 +19,64 @@
       Lampa.SettingsApi.addParam({
         component: 'interface',
         param: { name: SETTING_KEY, type: 'toggle', default: DEFAULT_ENABLED },
-        field: { name: 'Бейдж серій (S/E) на картках' }
+        field: { name: 'Бейдж серій (TV + S/E)' }
       });
     } catch (e) {}
   }
 
-  // ---------- CSS ----------
+  // ====== CSS (TV top-left, S/E bottom-left) ======
   try {
     var style = document.createElement('style');
     style.textContent = [
-      '.lampa-ep-badge{',
+      '.lampa-tv-badge{',
       ' position:absolute;',
-      ' right:0.4em;',
-      ' bottom:0.6em;',
-      ' padding:0.25em 0.45em;',
+      ' left:-0.8em;',
+      ' top:3.8em;',
+      ' padding:0.35em 0.45em;',
       ' font-size:0.85em;',
-      ' border-radius:0.35em;',
+      ' border-radius:0.3em;',
       ' background:#16c7ff;',
       ' color:#000;',
-      ' z-index:5;',
-      ' line-height:1.2;',
+      ' z-index:6;',
+      ' line-height:1.1;',
       '}',
-      '.lampa-ep-badge[data-kind="end"]{ background:#ffa416; color:#000; }',
-      '.lampa-ep-badge[data-kind="air"]{ background:#22ff16; color:#000; }',
-      '.lampa-ep-badge[data-kind="wait"]{ background:#16c7ff; color:#000; }',
+      '.lampa-se-badge{',
+      ' position:absolute;',
+      ' left:-0.8em;',
+      ' bottom:0.6em;',
+      ' padding:0.35em 0.45em;',
+      ' font-size:0.85em;',
+      ' border-radius:0.3em;',
+      ' background:#16c7ff;',
+      ' color:#000;',
+      ' z-index:6;',
+      ' line-height:1.1;',
+      '}',
+      '.lampa-se-badge[data-kind="end"]{ background:#ffa416; color:#000; }',
+      '.lampa-se-badge[data-kind="air"]{ background:#22ff16; color:#000; }',
+      '.lampa-se-badge[data-kind="wait"]{ background:#16c7ff; color:#000; }'
     ].join('\n');
     document.head.appendChild(style);
   } catch (e) {}
 
-  // ---------- TMDB fetch + cache ----------
-  var cache = Object.create(null); // id -> {status,lastSeason,lastEpisode,totalEpisodes}
+  // ====== TMDB CACHE + INFLIGHT ======
+  var cache = Object.create(null);     // id -> meta
+  var inflight = Object.create(null);  // id -> [callbacks]
+
+  function normalizeStatus(s) {
+    return (s || '').toString().toLowerCase();
+  }
 
   function tmdbTv(id, cb) {
     if (!id) return cb(null);
+
     if (cache[id]) return cb(cache[id]);
+
+    if (inflight[id]) {
+      inflight[id].push(cb);
+      return;
+    }
+    inflight[id] = [cb];
 
     try {
       var lang = 'ru';
@@ -71,69 +87,60 @@
       req.timeout(10000);
 
       req.silent(Lampa.TMDB.api(url), function (data) {
+        var meta = null;
         try {
-          var out = {
-            status: (data && data.status ? String(data.status).toLowerCase() : ''),
+          meta = {
+            status: normalizeStatus(data && data.status),
             lastSeason: null,
             lastEpisode: null,
             totalEpisodes: null
           };
 
-          // last season/episode
           if (data && data.last_episode_to_air && data.last_episode_to_air.season_number) {
-            out.lastSeason = data.last_episode_to_air.season_number;
+            meta.lastSeason = data.last_episode_to_air.season_number;
 
             var next = data.next_episode_to_air;
             var lastEp = data.last_episode_to_air.episode_number;
 
-            // якщо next_episode_to_air вже в минулому — беремо його episode_number
             if (next && next.air_date) {
               var d = new Date(next.air_date);
-              out.lastEpisode = (!isNaN(d.getTime()) && d <= new Date()) ? next.episode_number : lastEp;
+              meta.lastEpisode = (!isNaN(d.getTime()) && d <= new Date()) ? next.episode_number : lastEp;
             } else {
-              out.lastEpisode = lastEp;
+              meta.lastEpisode = lastEp;
             }
 
-            // total episodes for that season
             if (data.seasons && data.seasons.length) {
               for (var i = 0; i < data.seasons.length; i++) {
-                if (data.seasons[i].season_number === out.lastSeason) {
-                  out.totalEpisodes = data.seasons[i].episode_count || null;
+                if (data.seasons[i].season_number === meta.lastSeason) {
+                  meta.totalEpisodes = data.seasons[i].episode_count || null;
                   break;
                 }
               }
             }
           } else if (data && data.number_of_seasons) {
-            out.lastSeason = data.number_of_seasons;
+            meta.lastSeason = data.number_of_seasons;
           }
-
-          cache[id] = out;
-          cb(out);
         } catch (e) {
-          cb(null);
+          meta = null;
         }
+
+        if (meta) cache[id] = meta;
+        var list = inflight[id] || [];
+        delete inflight[id];
+        for (var k = 0; k < list.length; k++) list[k](meta);
       }, function () {
-        cb(null);
+        var list2 = inflight[id] || [];
+        delete inflight[id];
+        for (var k2 = 0; k2 < list2.length; k2++) list2[k2](null);
       });
     } catch (e) {
-      cb(null);
+      var list3 = inflight[id] || [];
+      delete inflight[id];
+      for (var k3 = 0; k3 < list3.length; k3++) list3[k3](null);
     }
   }
 
-  // ---------- render badge ----------
-  var processed = new WeakSet();
-
-  function ensureBadge(containerEl) {
-    if (!containerEl) return null;
-    var b = containerEl.querySelector('.lampa-ep-badge');
-    if (!b) {
-      b = document.createElement('div');
-      b.className = 'lampa-ep-badge';
-      containerEl.appendChild(b);
-    }
-    return b;
-  }
-
+  // ====== BADGE RENDER ======
   function isTv(data, cardEl) {
     if (!data) data = {};
     if (data.type === 'tv') return true;
@@ -144,138 +151,172 @@
   }
 
   function kindFromStatus(st) {
-    st = (st || '').toLowerCase();
+    st = normalizeStatus(st);
     if (st === 'ended' || st === 'canceled' || st === 'cancelled') return 'end';
-    if (st === 'returning series' || st === 'on the air' || st === 'on_the_air') return 'air';
-    if (st === 'planned' || st === 'rumored' || st === 'post production' || st === 'in production' || st === 'in_production') return 'wait';
+    if (st === 'returning series' || st === 'on_the_air' || st === 'on the air') return 'air';
     return 'wait';
   }
 
   function textFromMeta(meta) {
     if (!meta) return '';
-    if (meta.status && (meta.status === 'ended' || meta.status === 'canceled' || meta.status === 'cancelled')) return 'END';
+    if (meta.status === 'ended' || meta.status === 'canceled' || meta.status === 'cancelled') return 'END';
 
     if (meta.lastSeason && meta.lastEpisode) {
       if (meta.totalEpisodes && meta.lastEpisode === meta.totalEpisodes) return 'END';
-      if (meta.totalEpisodes) return 'S' + meta.lastSeason + ' E' + meta.lastEpisode + '/' + meta.totalEpisodes;
-      return 'S' + meta.lastSeason + ' E' + meta.lastEpisode;
+      if (meta.totalEpisodes) return 'S ' + meta.lastSeason + ' / E ' + meta.lastEpisode + ' / ' + meta.totalEpisodes;
+      return 'S ' + meta.lastSeason + ' / E ' + meta.lastEpisode;
     }
-    if (meta.lastSeason) return 'S' + meta.lastSeason;
+    if (meta.lastSeason) return 'S ' + meta.lastSeason;
     return '';
   }
 
-  function applyToCard(cardEl, data) {
+  function ensureBadge(view, cls) {
+    if (!view) return null;
+    var el = view.querySelector('.' + cls);
+    if (!el) {
+      el = document.createElement('div');
+      el.className = cls;
+      view.appendChild(el);
+    }
+    return el;
+  }
+
+  function removeIfEmpty(el) {
+    try {
+      if (el && (!el.textContent || !el.textContent.trim()) && el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    } catch (e) {}
+  }
+
+  // ВАЖЛИВО: НЕ “processed once”. Карти можуть перевикористовуватись при скролі.
+  function decorateCard(cardEl, data) {
     try {
       if (!enabled()) return;
       if (!cardEl || !cardEl.querySelector) return;
-      if (processed.has(cardEl)) return;
-      processed.add(cardEl);
 
+      // у Lampa бейджі треба чіпляти до .card__view (якщо є)
       var view = cardEl.querySelector('.card__view') || cardEl;
       if (!view) return;
-      if (!isTv(data, cardEl)) return;
+
+      if (!isTv(data, cardEl)) {
+        // якщо це не TV — прибираємо наші бейджі, якщо лишились
+        var oldTv = view.querySelector('.lampa-tv-badge');
+        var oldSe = view.querySelector('.lampa-se-badge');
+        if (oldTv && oldTv.parentNode) oldTv.parentNode.removeChild(oldTv);
+        if (oldSe && oldSe.parentNode) oldSe.parentNode.removeChild(oldSe);
+        return;
+      }
+
+      // TV badge (top-left)
+      var tv = ensureBadge(view, 'lampa-tv-badge');
+      tv.textContent = 'TV';
+
+      // S/E badge (bottom-left)
+      var se = ensureBadge(view, 'lampa-se-badge');
+      se.textContent = '...';
+      se.setAttribute('data-kind', 'wait');
 
       var id = data && data.id;
-      if (!id) return;
-
-      var badge = ensureBadge(view);
-      badge.textContent = '...';
-      badge.setAttribute('data-kind', 'wait');
+      if (!id) {
+        se.textContent = '';
+        removeIfEmpty(se);
+        return;
+      }
 
       tmdbTv(id, function (meta) {
-        if (!meta) { badge.textContent = ''; return; }
-
-        var txt = textFromMeta(meta);
-        badge.textContent = txt;
-        badge.setAttribute('data-kind', kindFromStatus(meta.status));
-
-        // якщо нема що показувати — прибираємо
-        if (!txt) badge.parentNode && badge.parentNode.removeChild(badge);
-      });
-    } catch (e) {}
-  }
-
-  // ---------- hooks ----------
-  function hookCards() {
-    // 1) найнадійніше — слухати подію card (у веб-версіях часто працює)
-    try {
-      Lampa.Listener.follow('card', function (e) {
         try {
-          if (!e || !e.object) return;
-          var obj = e.object;
+          // карта могла вже змінитись на інший контент — перевіримо, що id той самий
+          // (віртуальний список може перевикористати DOM)
+          var currentData = cardEl.card_data || data || {};
+          if (currentData && currentData.id && currentData.id !== id) return;
 
-          var el = obj.card || obj.element || obj;
-          var data = obj.data || obj.card_data || (el && el.card_data) || {};
+          var txt = textFromMeta(meta);
+          se.textContent = txt;
+          se.setAttribute('data-kind', kindFromStatus(meta && meta.status));
 
-          if (el && el.querySelector) applyToCard(el, data);
-        } catch (err) {}
+          if (!txt) removeIfEmpty(se);
+        } catch (e) {}
       });
     } catch (e) {}
-
-    // 2) додатково — пробіжка по вже видимим карткам
-    setTimeout(function () {
-      try {
-        var cards = document.querySelectorAll('.card');
-        for (var i = 0; i < cards.length; i++) {
-          var el = cards[i];
-          var data = el.card_data || {};
-          applyToCard(el, data);
-        }
-      } catch (e) {}
-    }, 2000);
   }
 
-  function hookFull() {
+  // ====== HOOKS (щоб не пропадало при скролі) ======
+  function handleCardEvent(obj) {
     try {
-      Lampa.Listener.follow('full', function (e) {
-        if (!enabled()) return;
-        if (!e || (e.type !== 'open' && e.type !== 'ready')) return;
-
-        setTimeout(function () {
-          try {
-            var active = Lampa.Activity && Lampa.Activity.active && Lampa.Activity.active();
-            if (!active || active.activity !== 'full') return;
-
-            var data = active.data || {};
-            if (!isTv(data)) return;
-            if (!data.id) return;
-
-            tmdbTv(data.id, function (meta) {
-              try {
-                var txt = textFromMeta(meta);
-                if (!txt) return;
-
-                var root = active.activity && active.activity.render && active.activity.render();
-                if (!root || !root.querySelector) return;
-
-                if (root.querySelector('.lampa-ep-badge-full')) return;
-
-                var tags = root.querySelector('.full-start__tags');
-                if (!tags) return;
-
-                var d = document.createElement('div');
-                d.className = 'full-start__tag lampa-ep-badge-full';
-                d.innerHTML = '<img src="./img/icons/menu/movie.svg" /> <div>' + (Lampa.Lang ? Lampa.Lang.translate(txt) : txt) + '</div>';
-                tags.appendChild(d);
-              } catch (err) {}
-            });
-          } catch (err2) {}
-        }, 100);
-      });
+      if (!obj) return;
+      var el = obj.card || obj.element || obj;
+      var data = obj.data || obj.card_data || (el && el.card_data) || {};
+      if (el && el.querySelector) decorateCard(el, data);
     } catch (e) {}
   }
 
+  function hookCardEvents() {
+    try {
+      if (Lampa.Listener && Lampa.Listener.follow) {
+        // у різних збірках еvent.type може відрізнятись — не фільтруємо жорстко
+        Lampa.Listener.follow('card', function (e) {
+          try { if (e && e.object) handleCardEvent(e.object); } catch (err) {}
+        });
+      }
+    } catch (e) {}
+  }
+
+  // MutationObserver: коли DOM підвантажує/перемальовує картки при скролі
+  function hookMutations() {
+    try {
+      var obs = new MutationObserver(function (mutations) {
+        if (!enabled()) return;
+
+        for (var i = 0; i < mutations.length; i++) {
+          var m = mutations[i];
+          if (!m.addedNodes) continue;
+
+          for (var j = 0; j < m.addedNodes.length; j++) {
+            var node = m.addedNodes[j];
+            if (!node || !node.querySelectorAll) continue;
+
+            // нові .card
+            var cards = node.matches && node.matches('.card') ? [node] : node.querySelectorAll('.card');
+            if (!cards || !cards.length) continue;
+
+            for (var k = 0; k < cards.length; k++) {
+              var el = cards[k];
+              var data = el.card_data || {};
+              decorateCard(el, data);
+            }
+          }
+        }
+      });
+
+      obs.observe(document.body, { childList: true, subtree: true });
+    } catch (e) {}
+  }
+
+  // Страховка: пробігтись по вже видимим карткам
+  function initialScan() {
+    try {
+      var cards = document.querySelectorAll('.card');
+      for (var i = 0; i < cards.length; i++) {
+        var el = cards[i];
+        decorateCard(el, el.card_data || {});
+      }
+    } catch (e) {}
+  }
+
+  // ====== INIT ======
   function init() {
     addSetting();
-    hookCards();
-    hookFull();
-    // noty('Episodes badge plugin: ON'); // можна увімкнути для тесту
+    hookCardEvents();
+    hookMutations();
+
+    setTimeout(initialScan, 1500);
+    setTimeout(initialScan, 3500);
   }
 
-  // запуск з “страховкою”
   function startOnce() {
-    if (window.lampa_episodes_badge_started) return;
-    window.lampa_episodes_badge_started = true;
+    if (window.lampa_episodes_badge_v1_started) return;
+    window.lampa_episodes_badge_v1_started = true;
     init();
   }
 
