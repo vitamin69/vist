@@ -2,11 +2,20 @@
   'use strict';
 
   var ENDED_TEXT = 'Завершено';
+  var CACHE_TTL = 1000 * 60 * 60 * 6; // 6 год
+  var cache = window.__seinfo_cache2 || (window.__seinfo_cache2 = {});
+
+  function cacheGet(k){
+    var v = cache[k];
+    if(!v) return null;
+    if(Date.now() - v.t > CACHE_TTL) return null;
+    return v.v;
+  }
+  function cacheSet(k,v){ cache[k] = {t:Date.now(), v:v}; }
 
   function addStyleOnce() {
-    if (window.__seinfo_style) return;
-    window.__seinfo_style = true;
-
+    if (window.__seinfo_style2) return;
+    window.__seinfo_style2 = true;
     var s = document.createElement('style');
     s.innerHTML = `
       .card__seinfo_badge{
@@ -17,13 +26,9 @@
         max-width:92%;
         white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
       }
-      .card__seinfo_dot{
-        position:absolute; left:.55em; top:.55em; z-index:999;
-        width:.55em; height:.55em; border-radius:50%;
-        background:rgba(255, 200, 0, .95);
-        box-shadow:0 0 0 .12em rgba(0,0,0,.35);
-      }
+      .card__seinfo_ok{ background:rgba(0,0,0,.55); }
       .card__seinfo_ended{ background:rgba(56,165,100,.78) !important; }
+      .card__seinfo_err{ background:rgba(200,60,60,.78) !important; }
     `;
     document.head.appendChild(s);
   }
@@ -43,8 +48,7 @@
     return many;
   }
 
-  function ensureContainer(html) {
-    // пробуємо знайти “картинку” або основний блок
+  function ensureBox(html) {
     var box =
       html.querySelector('.card__view') ||
       html.querySelector('.card__img') ||
@@ -55,52 +59,22 @@
     return box;
   }
 
-  function setDot(html) {
-    var box = ensureContainer(html);
-    if (box.querySelector('.card__seinfo_dot')) return;
-    var d = document.createElement('div');
-    d.className = 'card__seinfo_dot';
-    box.appendChild(d);
-  }
-
-  function setBadge(html, text, ended) {
-    var box = ensureContainer(html);
-
+  function setBadge(html, text, cls) {
+    var box = ensureBox(html);
     var old = box.querySelector('.card__seinfo_badge');
     if (old) old.remove();
 
     var b = document.createElement('div');
-    b.className = 'card__seinfo_badge' + (ended ? ' card__seinfo_ended' : '');
+    b.className = 'card__seinfo_badge ' + (cls || 'card__seinfo_ok');
     b.textContent = text;
     box.appendChild(b);
-  }
-
-  function fetchTmdbFull(card, ok) {
-    // 3 варіанти (бо в різних збірках Lampa API різний)
-    try {
-      if (Lampa.Api && Lampa.Api.sources && Lampa.Api.sources.tmdb && Lampa.Api.sources.tmdb.full) {
-        return Lampa.Api.sources.tmdb.full(
-          { card: card, id: card.id, method: 'tv' },
-          function (json) { ok(json); },
-          function () { ok(null); }
-        );
-      }
-    } catch (e) {}
-
-    try {
-      if (Lampa.TMDB && Lampa.TMDB.tv) {
-        return Lampa.TMDB.tv(card.id, function (json) { ok(json); }, function () { ok(null); });
-      }
-    } catch (e) {}
-
-    ok(null);
   }
 
   function buildText(details) {
     if (!details) return null;
 
     var status = String(details.status || '').toLowerCase();
-    if (status === 'ended') return { text: ENDED_TEXT, ended: true };
+    if (status === 'ended') return { text: ENDED_TEXT, cls: 'card__seinfo_ended' };
 
     var s = details.number_of_seasons;
     var e = details.number_of_episodes;
@@ -110,68 +84,85 @@
     if (e != null) parts.push(Number(e) + ' ' + uaPlural(e, 'серія', 'серії', 'серій'));
 
     if (!parts.length) return null;
-    return { text: parts.join(' • '), ended: false };
+    return { text: parts.join(' • '), cls: 'card__seinfo_ok' };
   }
 
-  function hookCards() {
-    addStyleOnce();
+  // намагаємось кількома способами, бо в різних збірках API різний
+  function fetchFull(card, cb) {
+    var id = card.id;
+    if (!id) return cb(null);
 
-    // Найбільш “живучий” спосіб — слухати події (у багатьох збірках є 'card')
-    if (Lampa.Listener && Lampa.Listener.follow) {
-      Lampa.Listener.follow('card', function (e) {
-        if (!e || !e.card || !e.html) return;
-        if (!isTv(e.card)) return;
-
-        // індикатор життя
-        setDot(e.html);
-
-        // якщо вже є дані прямо в card — покажемо одразу
-        if (e.card.number_of_seasons || e.card.number_of_episodes) {
-          var quick = buildText(e.card);
-          if (quick) setBadge(e.html, quick.text, quick.ended);
-        }
-
-        // підтягнути повні дані
-        fetchTmdbFull(e.card, function (full) {
-          var built = buildText(full);
-          if (built) setBadge(e.html, built.text, built.ended);
-        });
-      });
-      return true;
-    }
-
-    // fallback: якщо подій нема, пробуємо Maker (як у багатьох плагінах)
+    // 1) найчастіше так
     try {
-      var CardMaker = Lampa.Maker && Lampa.Maker.map && Lampa.Maker.map('Card');
-      if (CardMaker && CardMaker.Card && CardMaker.Card.onVisible) {
-        var orig = CardMaker.Card.onVisible;
-        CardMaker.Card.onVisible = function () {
-          orig.apply(this, arguments);
-          var card = this.data || this.card || this;
-          if (!isTv(card)) return;
-          if (!this.html) return;
-
-          setDot(this.html);
-
-          fetchTmdbFull(card, function (full) {
-            var built = buildText(full);
-            if (built) setBadge(this.html, built.text, built.ended);
-          }.bind(this));
-        };
-        return true;
+      if (Lampa.Api && Lampa.Api.sources && Lampa.Api.sources.tmdb && Lampa.Api.sources.tmdb.full) {
+        return Lampa.Api.sources.tmdb.full(
+          { card: card, id: id, method: 'tv' },
+          function (json) { cb(json); },
+          function () { cb(null); }
+        );
       }
     } catch (e) {}
 
-    return false;
+    // 2) інколи full хоче type замість method
+    try {
+      if (Lampa.Api && Lampa.Api.sources && Lampa.Api.sources.tmdb && Lampa.Api.sources.tmdb.full) {
+        return Lampa.Api.sources.tmdb.full(
+          { card: card, id: id, type: 'tv' },
+          function (json) { cb(json); },
+          function () { cb(null); }
+        );
+      }
+    } catch (e) {}
+
+    // 3) запасний варіант (деякі збірки мають TMDB обгортку)
+    try {
+      if (Lampa.TMDB && typeof Lampa.TMDB.tv === 'function') {
+        return Lampa.TMDB.tv(id, function (json) { cb(json); }, function () { cb(null); });
+      }
+    } catch (e) {}
+
+    cb(null);
+  }
+
+  function onCard(card, html) {
+    if (!isTv(card) || !html) return;
+
+    var key = 'tv:' + String(card.id || '');
+    var cached = cacheGet(key);
+    if (cached) {
+      var builtC = buildText(cached);
+      if (builtC) setBadge(html, builtC.text, builtC.cls);
+      return;
+    }
+
+    setBadge(html, '…', 'card__seinfo_ok');
+
+    fetchFull(card, function (full) {
+      if (!full) {
+        setBadge(html, 'TMDB', 'card__seinfo_err');
+        return;
+      }
+      cacheSet(key, full);
+
+      var built = buildText(full);
+      if (built) setBadge(html, built.text, built.cls);
+      else setBadge(html, 'TMDB', 'card__seinfo_err');
+    });
   }
 
   function start() {
-    if (window.__seinfo_started) return;
-    window.__seinfo_started = true;
+    if (window.__seinfo_started2) return;
+    window.__seinfo_started2 = true;
 
-    var ok = hookCards();
-    // якщо не підчепилось — хоча б один раз у консоль
-    try { console.log('[seinfo] started, hook=' + ok); } catch (e) {}
+    addStyleOnce();
+
+    // найкраще — через події карток
+    if (Lampa.Listener && Lampa.Listener.follow) {
+      Lampa.Listener.follow('card', function (e) {
+        if (!e || !e.card || !e.html) return;
+        onCard(e.card, e.html);
+      });
+    }
   }
 
   if (window.appready) start();
@@ -179,8 +170,5 @@
     Lampa.Listener.follow('app', function (e) {
       if (e && e.type === 'ready') start();
     });
-  } else {
-    // останній шанс
-    setTimeout(start, 1500);
-  }
+  } else setTimeout(start, 1500);
 })();
