@@ -1,157 +1,186 @@
 (function () {
   'use strict';
 
-  // ====== Налаштування ======
-  var SHOW_EPISODES = true;     // показувати "серій" (number_of_episodes)
-  var SHOW_SEASONS = true;      // показувати "сезонів" (number_of_seasons)
-  var ENDED_TEXT = 'Завершено'; // текст для завершених
-  var CACHE_TTL = 1000 * 60 * 60 * 12; // 12 годин кеш
+  var ENDED_TEXT = 'Завершено';
 
-  // ====== Кеш ======
-  var cache = window.__seinfo_cache || (window.__seinfo_cache = {});
-  function cacheGet(key) {
-    var n = cache[key];
-    if (!n) return null;
-    if (Date.now() - n.t > CACHE_TTL) return null;
-    return n.v;
-  }
-  function cacheSet(key, value) {
-    cache[key] = { t: Date.now(), v: value };
+  function addStyleOnce() {
+    if (window.__seinfo_style) return;
+    window.__seinfo_style = true;
+
+    var s = document.createElement('style');
+    s.innerHTML = `
+      .card__seinfo_badge{
+        position:absolute; left:.45em; bottom:.45em; z-index:999;
+        padding:.18em .5em; border-radius:.75em;
+        background:rgba(0,0,0,.55);
+        font-size:1.05em; line-height:1.2;
+        max-width:92%;
+        white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      }
+      .card__seinfo_dot{
+        position:absolute; left:.55em; top:.55em; z-index:999;
+        width:.55em; height:.55em; border-radius:50%;
+        background:rgba(255, 200, 0, .95);
+        box-shadow:0 0 0 .12em rgba(0,0,0,.35);
+      }
+      .card__seinfo_ended{ background:rgba(56,165,100,.78) !important; }
+    `;
+    document.head.appendChild(s);
   }
 
-  // ====== Українські закінчення (спрощено, але нормально виглядає) ======
-  function uaPlural(n, one, few, many) {
-    n = Math.abs(Number(n)) || 0;
-    var n10 = n % 10, n100 = n % 100;
-    if (n10 === 1 && n100 !== 11) return one;              // 1
-    if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return few; // 2-4
-    return many;                                           // 0,5-9,11-14
-  }
-
-  function isTvCard(card) {
+  function isTv(card) {
     if (!card) return false;
-    // у Lampa у ТВ часто є name/first_air_date, а у фільмів title/release_date
-    if (card.type === 'tv') return true;
-    if (card.name && (card.first_air_date || card.number_of_seasons || card.last_episode_to_air)) return true;
-    // fallback: інколи буває media_type
-    if (card.media_type === 'tv') return true;
+    if (card.type === 'tv' || card.media_type === 'tv') return true;
+    if (card.name && (card.first_air_date || card.last_episode_to_air || card.number_of_seasons)) return true;
     return false;
   }
 
-  function ensureStyle() {
-    if (window.__seinfo_style_added) return;
-    window.__seinfo_style_added = true;
-
-    var style = document.createElement('style');
-    style.innerHTML =
-      '.card__seinfo{' +
-        'position:absolute;left:.45em;bottom:.45em;z-index:3;' +
-        'padding:.22em .55em;border-radius:.75em;' +
-        'background:rgba(0,0,0,.55);' +
-        'font-size:1.05em;line-height:1.2;' +
-        'max-width:92%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;' +
-      '}' +
-      '.card__seinfo._ended{background:rgba(56,165,100,.75);}';
-    document.head.appendChild(style);
+  function uaPlural(n, one, few, many) {
+    n = Math.abs(Number(n)) || 0;
+    var n10 = n % 10, n100 = n % 100;
+    if (n10 === 1 && n100 !== 11) return one;
+    if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return few;
+    return many;
   }
 
-  function renderBadge(cardHtml, text, ended) {
-    if (!cardHtml) return;
+  function ensureContainer(html) {
+    // пробуємо знайти “картинку” або основний блок
+    var box =
+      html.querySelector('.card__view') ||
+      html.querySelector('.card__img') ||
+      html.querySelector('.card__body') ||
+      html;
 
-    // прибрати старий бейдж (щоб не дублювався)
-    var old = cardHtml.querySelector('.card__seinfo');
+    if (getComputedStyle(box).position === 'static') box.style.position = 'relative';
+    return box;
+  }
+
+  function setDot(html) {
+    var box = ensureContainer(html);
+    if (box.querySelector('.card__seinfo_dot')) return;
+    var d = document.createElement('div');
+    d.className = 'card__seinfo_dot';
+    box.appendChild(d);
+  }
+
+  function setBadge(html, text, ended) {
+    var box = ensureContainer(html);
+
+    var old = box.querySelector('.card__seinfo_badge');
     if (old) old.remove();
 
-    var view = cardHtml.querySelector('.card__view') || cardHtml;
-    // .card__view зазвичай position:relative, але на всяк випадок:
-    if (getComputedStyle(view).position === 'static') view.style.position = 'relative';
+    var b = document.createElement('div');
+    b.className = 'card__seinfo_badge' + (ended ? ' card__seinfo_ended' : '');
+    b.textContent = text;
+    box.appendChild(b);
+  }
 
-    var div = document.createElement('div');
-    div.className = 'card__seinfo' + (ended ? ' _ended' : '');
-    div.textContent = text;
-    view.appendChild(div);
+  function fetchTmdbFull(card, ok) {
+    // 3 варіанти (бо в різних збірках Lampa API різний)
+    try {
+      if (Lampa.Api && Lampa.Api.sources && Lampa.Api.sources.tmdb && Lampa.Api.sources.tmdb.full) {
+        return Lampa.Api.sources.tmdb.full(
+          { card: card, id: card.id, method: 'tv' },
+          function (json) { ok(json); },
+          function () { ok(null); }
+        );
+      }
+    } catch (e) {}
+
+    try {
+      if (Lampa.TMDB && Lampa.TMDB.tv) {
+        return Lampa.TMDB.tv(card.id, function (json) { ok(json); }, function () { ok(null); });
+      }
+    } catch (e) {}
+
+    ok(null);
   }
 
   function buildText(details) {
-    if (!details) return '';
+    if (!details) return null;
 
-    var status = (details.status || '').toLowerCase();
-    var ended = status === 'ended';
+    var status = String(details.status || '').toLowerCase();
+    if (status === 'ended') return { text: ENDED_TEXT, ended: true };
 
-    if (ended) return { text: ENDED_TEXT, ended: true };
+    var s = details.number_of_seasons;
+    var e = details.number_of_episodes;
 
     var parts = [];
-    if (SHOW_SEASONS && details.number_of_seasons != null) {
-      var s = Number(details.number_of_seasons) || 0;
-      parts.push(s + ' ' + uaPlural(s, 'сезон', 'сезони', 'сезонів'));
-    }
-    if (SHOW_EPISODES && details.number_of_episodes != null) {
-      var e = Number(details.number_of_episodes) || 0;
-      parts.push(e + ' ' + uaPlural(e, 'серія', 'серії', 'серій'));
-    }
+    if (s != null) parts.push(Number(s) + ' ' + uaPlural(s, 'сезон', 'сезони', 'сезонів'));
+    if (e != null) parts.push(Number(e) + ' ' + uaPlural(e, 'серія', 'серії', 'серій'));
 
+    if (!parts.length) return null;
     return { text: parts.join(' • '), ended: false };
   }
 
-  function fetchTvDetails(card, onDone) {
-    // важливо: Lampa зазвичай тягне full через TMDB source
-    // у плагінах це роблять так: Lampa.Api.sources.tmdb.full(params, ok, err) :contentReference[oaicite:1]{index=1}
-    try {
-      Lampa.Api.sources.tmdb.full(
-        { card: card, id: card.id, method: 'tv' },
-        function (json) { onDone(null, json); },
-        function (err) { onDone(err || new Error('tmdb.full error')); }
-      );
-    } catch (e) {
-      onDone(e);
+  function hookCards() {
+    addStyleOnce();
+
+    // Найбільш “живучий” спосіб — слухати події (у багатьох збірках є 'card')
+    if (Lampa.Listener && Lampa.Listener.follow) {
+      Lampa.Listener.follow('card', function (e) {
+        if (!e || !e.card || !e.html) return;
+        if (!isTv(e.card)) return;
+
+        // індикатор життя
+        setDot(e.html);
+
+        // якщо вже є дані прямо в card — покажемо одразу
+        if (e.card.number_of_seasons || e.card.number_of_episodes) {
+          var quick = buildText(e.card);
+          if (quick) setBadge(e.html, quick.text, quick.ended);
+        }
+
+        // підтягнути повні дані
+        fetchTmdbFull(e.card, function (full) {
+          var built = buildText(full);
+          if (built) setBadge(e.html, built.text, built.ended);
+        });
+      });
+      return true;
     }
+
+    // fallback: якщо подій нема, пробуємо Maker (як у багатьох плагінах)
+    try {
+      var CardMaker = Lampa.Maker && Lampa.Maker.map && Lampa.Maker.map('Card');
+      if (CardMaker && CardMaker.Card && CardMaker.Card.onVisible) {
+        var orig = CardMaker.Card.onVisible;
+        CardMaker.Card.onVisible = function () {
+          orig.apply(this, arguments);
+          var card = this.data || this.card || this;
+          if (!isTv(card)) return;
+          if (!this.html) return;
+
+          setDot(this.html);
+
+          fetchTmdbFull(card, function (full) {
+            var built = buildText(full);
+            if (built) setBadge(this.html, built.text, built.ended);
+          }.bind(this));
+        };
+        return true;
+      }
+    } catch (e) {}
+
+    return false;
   }
 
   function start() {
-    if (window.__seinfo_plugin_started) return;
-    window.__seinfo_plugin_started = true;
+    if (window.__seinfo_started) return;
+    window.__seinfo_started = true;
 
-    ensureStyle();
-
-    var CardMaker = Lampa.Maker.map('Card');
-    var originalOnVisible = CardMaker.Card.onVisible;
-
-    CardMaker.Card.onVisible = function () {
-      originalOnVisible.apply(this, arguments);
-
-      var card = this.data || this.card || this;
-      if (!isTvCard(card)) return;
-
-      var key = 'tv:' + (card.id || '') + ':' + (Lampa.Storage.get('tmdb_lang', 'ru') || 'ru');
-      var cached = cacheGet(key);
-
-      var self = this;
-
-      if (cached) {
-        var built = buildText(cached);
-        if (built.text) renderBadge(self.html, built.text, built.ended);
-        return;
-      }
-
-      // тимчасовий бейдж, поки вантажиться (не обов’язково)
-      renderBadge(self.html, '…', false);
-
-      fetchTvDetails(card, function (_err, details) {
-        if (!details) return;
-
-        cacheSet(key, details);
-
-        var built = buildText(details);
-        if (built.text) renderBadge(self.html, built.text, built.ended);
-      });
-    };
+    var ok = hookCards();
+    // якщо не підчепилось — хоча б один раз у консоль
+    try { console.log('[seinfo] started, hook=' + ok); } catch (e) {}
   }
 
-  // стандартний автозапуск як у більшості плагінів Lampa :contentReference[oaicite:2]{index=2}
   if (window.appready) start();
-  else {
+  else if (window.Lampa && Lampa.Listener && Lampa.Listener.follow) {
     Lampa.Listener.follow('app', function (e) {
-      if (e.type === 'ready') start();
+      if (e && e.type === 'ready') start();
     });
+  } else {
+    // останній шанс
+    setTimeout(start, 1500);
   }
 })();
