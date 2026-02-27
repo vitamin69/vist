@@ -1,3 +1,4 @@
+try { Lampa.Noty.show('Cards_v0.1 loaded v=1'); } catch(e) {}
 (function () {
   'use strict';
 
