@@ -3,9 +3,27 @@
 
   var ENDED_TEXT = 'Завершено';
 
+  function banner() {
+    if (window.__seinfo_banner) return;
+    window.__seinfo_banner = true;
+
+    var b = document.createElement('div');
+    b.textContent = 'SEINFO LOADED';
+    b.style.cssText =
+      'position:fixed;left:12px;top:12px;z-index:999999;' +
+      'background:rgba(255,210,0,.95);color:#000;' +
+      'padding:6px 10px;border-radius:12px;font-weight:800;' +
+      'font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.25);';
+    document.body.appendChild(b);
+
+    setTimeout(function () {
+      if (b && b.parentNode) b.parentNode.removeChild(b);
+    }, 2500);
+  }
+
   function addStyleOnce() {
-    if (window.__seinfo_style_local) return;
-    window.__seinfo_style_local = true;
+    if (window.__seinfo_style3) return;
+    window.__seinfo_style3 = true;
     var s = document.createElement('style');
     s.innerHTML = `
       .card__seinfo_badge{
@@ -21,17 +39,17 @@
     document.head.appendChild(s);
   }
 
-  function isTv(card) {
-    if (!card) return false;
-    return card.type === 'tv' || card.media_type === 'tv' || !!card.name;
-  }
-
   function uaPlural(n, one, few, many) {
     n = Math.abs(Number(n)) || 0;
     var n10 = n % 10, n100 = n % 100;
     if (n10 === 1 && n100 !== 11) return one;
     if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return few;
     return many;
+  }
+
+  function isTv(card) {
+    if (!card) return false;
+    return card.type === 'tv' || card.media_type === 'tv' || !!card.name;
   }
 
   function ensureBox(html) {
@@ -41,12 +59,15 @@
       html.querySelector('.card__body') ||
       html;
 
-    if (getComputedStyle(box).position === 'static') box.style.position = 'relative';
+    if (box && getComputedStyle(box).position === 'static') box.style.position = 'relative';
     return box;
   }
 
   function setBadge(html, text, ended) {
+    if (!html) return;
     var box = ensureBox(html);
+    if (!box) return;
+
     var old = box.querySelector('.card__seinfo_badge');
     if (old) old.remove();
 
@@ -56,53 +77,83 @@
     box.appendChild(b);
   }
 
-  function getInfoFromCard(card) {
-    // 1) статус
+  function buildFromCard(card) {
     var status = String(card.status || '').toLowerCase();
-    var ended = status === 'ended' || status === 'canceled' || status === 'cancelled';
+    if (status === 'ended') return { text: ENDED_TEXT, ended: true };
 
-    // 2) сезони/серії (якщо вже є)
     var s = card.number_of_seasons;
     var e = card.number_of_episodes;
-
-    // 3) інколи у TV є last_episode_to_air і немає next_episode_to_air — це часто означає, що серіал закінчено,
-    // але це не 100%, тому використовуємо як “м’яку” ознаку тільки якщо статус пустий.
-    if (!card.status && card.last_episode_to_air && !card.next_episode_to_air) {
-      // якщо ще й є last_air_date і він давній — краще, але лишимо просто як натяк
-      ended = false; // НЕ будемо вгадувати “Ended” без status, щоб не брехати
-    }
-
-    if (ended) return { text: ENDED_TEXT, ended: true };
 
     var parts = [];
     if (s != null) parts.push(Number(s) + ' ' + uaPlural(s, 'сезон', 'сезони', 'сезонів'));
     if (e != null) parts.push(Number(e) + ' ' + uaPlural(e, 'серія', 'серії', 'серій'));
 
-    if (!parts.length) return null;
-    return { text: parts.join(' • '), ended: false };
+    if (parts.length) return { text: parts.join(' • '), ended: false };
+
+    // якщо даних немає — хоча б покажемо “TV”, щоб бачити що хук працює
+    return { text: 'TV', ended: false };
+  }
+
+  function apply(card, html) {
+    if (!isTv(card)) return;
+    var info = buildFromCard(card);
+    if (info) setBadge(html, info.text, info.ended);
+  }
+
+  function hook() {
+    addStyleOnce();
+
+    // 1) якщо у твоїй збірці є події карток
+    if (window.Lampa && Lampa.Listener && Lampa.Listener.follow) {
+      Lampa.Listener.follow('card', function (e) {
+        if (!e || !e.card || !e.html) return;
+        apply(e.card, e.html);
+      });
+    }
+
+    // 2) fallback через Maker (у багатьох збірках працює)
+    try {
+      var CardMaker = Lampa && Lampa.Maker && Lampa.Maker.map && Lampa.Maker.map('Card');
+      if (CardMaker && CardMaker.Card && CardMaker.Card.onVisible) {
+        var orig = CardMaker.Card.onVisible;
+        CardMaker.Card.onVisible = function () {
+          orig.apply(this, arguments);
+          var card = this.data || this.card || this;
+          if (this.html) apply(card, this.html);
+        };
+      }
+    } catch (e) {}
+
+    // 3) ще один fallback: періодично “підчіплюємось”, якщо Lampa пізно ініціалізується
+    if (!window.__seinfo_tick) {
+      window.__seinfo_tick = setInterval(function () {
+        try {
+          if (window.Lampa && Lampa.Maker && Lampa.Maker.map) {
+            // просто щоб не спамити — якщо вже запрацювало, зупинимо
+            clearInterval(window.__seinfo_tick);
+          }
+        } catch (e) {}
+      }, 1000);
+    }
   }
 
   function start() {
-    if (window.__seinfo_local_started) return;
-    window.__seinfo_local_started = true;
+    if (window.__seinfo_started3) return;
+    window.__seinfo_started3 = true;
 
-    addStyleOnce();
+    if (document.body) banner();
+    else document.addEventListener('DOMContentLoaded', banner);
 
-    if (Lampa.Listener && Lampa.Listener.follow) {
-      Lampa.Listener.follow('card', function (ev) {
-        if (!ev || !ev.card || !ev.html) return;
-        if (!isTv(ev.card)) return;
+    // запускаємо одразу і ще раз після готовності
+    hook();
 
-        var info = getInfoFromCard(ev.card);
-        if (info) setBadge(ev.html, info.text, info.ended);
+    if (window.Lampa && Lampa.Listener && Lampa.Listener.follow) {
+      Lampa.Listener.follow('app', function (e) {
+        if (e && e.type === 'ready') hook();
       });
     }
   }
 
-  if (window.appready) start();
-  else if (window.Lampa && Lampa.Listener && Lampa.Listener.follow) {
-    Lampa.Listener.follow('app', function (e) {
-      if (e && e.type === 'ready') start();
-    });
-  } else setTimeout(start, 1500);
+  // старт якнайраніше
+  start();
 })();
